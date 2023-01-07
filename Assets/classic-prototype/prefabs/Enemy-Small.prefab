@@ -154,6 +154,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   playerTransform: {fileID: 0}
   damage: 2
+  dieOnTouch: 1
 --- !u!114 &4360188958665171783
 MonoBehaviour:
   m_ObjectHideFlags: 0

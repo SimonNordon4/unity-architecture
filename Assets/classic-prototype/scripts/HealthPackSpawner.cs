@@ -13,7 +13,7 @@ namespace Classic
         public float spawnInterval = 5f;
         private float _timeSinceLastSpawn = 0f;
         
-        Vector2 minMaxSpawnDistance = new Vector2(10f, 30f);
+        public Vector2 minMaxSpawnDistance = new Vector2(10f, 30f);
 
         private void Update()
         {
@@ -32,7 +32,7 @@ namespace Classic
                 concurrentPickups++;
                 
                 // create a random spawn position within the spawn area that is 1 away from the player position
-                Vector2 randomDirection = Random.insideUnitCircle;
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 Vector3 randomWorldDirection = new Vector3(randomDirection.x, 0f, randomDirection.y);
                 Vector3 spawnPosition =
                     randomWorldDirection * Random.Range(minMaxSpawnDistance.x, minMaxSpawnDistance.y) +

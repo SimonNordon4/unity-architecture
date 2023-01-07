@@ -1219,6 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541456198eb66e340a329faa3adbc297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: classic-prototype-game-level1
 --- !u!1 &2097305700
 GameObject:
   m_ObjectHideFlags: 0

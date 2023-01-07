@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Classic
 {
-    public class LoadGame : MonoBehaviour
+    public class LoadScene : MonoBehaviour
     {
+        public string sceneName;
         public void LoadGameScene()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("classic-prototype/scenes/classic-prototype-game");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
     }
 }

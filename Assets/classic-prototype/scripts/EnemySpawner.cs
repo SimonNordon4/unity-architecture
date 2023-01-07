@@ -40,12 +40,10 @@ namespace Classic
             if (currentEnemies < maxCurrentEnemies)
             {
                 // create a random spawn position within the spawn area that is 1 away from the player position
-                Vector2 randomDirection = Random.insideUnitCircle;
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 Vector3 randomWorldDirection = new Vector3(randomDirection.x, 0f, randomDirection.y);
-                Vector3 spawnPosition =
-                    randomWorldDirection * Random.Range(minMaxSpawnDistance.x, minMaxSpawnDistance.y) +
-                    playerTransform.position;
-                spawnPosition.y = 1f;
+                var randomDistance = Random.Range(minMaxSpawnDistance.x, minMaxSpawnDistance.y);
+                Vector3 spawnPosition = randomDistance * randomWorldDirection + playerTransform.position;
 
                 var enemyToSpawn = enemyPrefab;
                 
@@ -60,7 +58,7 @@ namespace Classic
                 var spawnBigEnemy = Random.Range(0,100) < bigEnemySpawnChance *100f;
                 if (spawnBigEnemy)
                     enemyToSpawn = bigEnemyPrefab;
-
+                
                 var newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
                 var newEnemyController = newEnemy.GetComponent<Enemy>();
                 newEnemyController.spawner = this;

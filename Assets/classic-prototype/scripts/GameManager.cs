@@ -8,28 +8,43 @@ namespace Classic
         public Health playerHealth;
         public EnemySpawner enemySpawner;
 
+        public GameObject winScreen;
+        public GameObject loseScreen;
+
         public void Update()
         {
             if (enemySpawner.enemiesToSpawn <= 0 && enemySpawner.currentEnemies <= 0)
             {
-                Win();
+                EndGame();
+                winScreen.SetActive(true);
             }
             
             if (playerHealth.currentHealth <= 0)
             {
-                Lose();
+                EndGame();
+                loseScreen.SetActive(true);
             }
         }
         
-        public void Win()
+        private void EndGame()
         {
-            Debug.Log("You Win!");
-        }
-        
-        public void Lose()
-        {
+            // disable the camera follower.
+            Camera.main.GetComponent<FollowTransform>().enabled = false;
+            
+            // disable the spawners
+            enemySpawner.enabled = false;
+            FindObjectOfType<HealthPackSpawner>().enabled = false;
+            FindObjectOfType<BulletBoostSpawner>().enabled = false;
+            
+            // disable the player
+            var player = FindObjectsOfType<Player>();
             var enemies = FindObjectsOfType<Enemy>();
             var bullets = FindObjectsOfType<Bullet>();
+            
+            for(int i = 0; i < player.Length; i++)
+            {
+                Destroy(player[i].gameObject);
+            }
 
             for(int i = 0; i < enemies.Length; i++)
             {

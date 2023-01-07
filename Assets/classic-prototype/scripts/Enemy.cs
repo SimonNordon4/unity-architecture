@@ -8,6 +8,8 @@ namespace Classic
         public EnemySpawner spawner;
         public Transform playerTransform;
         public int damage = 1;
+
+        public bool dieOnTouch = false;
         
         private Health _health;
         private Move _move;
@@ -35,6 +37,12 @@ namespace Classic
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<Health>().currentHealth -= damage;
+
+                if (dieOnTouch)
+                {
+                    spawner.EnemyDied();
+                    Destroy(gameObject);
+                }
             }
         }
     }

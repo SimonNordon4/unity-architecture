@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Classic
 {
-    public class PlayerController : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         private Move _move;
         private Gun _gun;
 
-        private void OnEnable()
+        private void Start()
         {
             _move = GetComponent<Move>();
             _gun = GetComponent<Gun>();
@@ -18,7 +18,7 @@ namespace Classic
 
         public void Update()
         {
-            // Move the PlayerController
+            // Move the Player
             var moveDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.D))
             {
@@ -36,14 +36,21 @@ namespace Classic
             {
                 moveDirection.z -= 1;
             }
-            
-            _move.MovePerFrame(moveDirection);
+
+            _move.direction = moveDirection;
             
             // Bullet Firing
             if (Input.GetMouseButton(0))
             {
-                var bulletDirection = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                _gun.FireBullet(bulletDirection);
+                // get the hit position of a raycast from the mouse position
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    var bulletDirection = hit.point - transform.position;
+                    bulletDirection.y = 0;
+                    _gun.FireBullet(bulletDirection.normalized);
+                }
             }
         }
     }

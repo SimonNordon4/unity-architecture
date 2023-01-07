@@ -5,24 +5,25 @@ namespace Classic
 {
     public class Bullet : MonoBehaviour
     {
-        public Vector3 direction;
-        public int damage = 1;
-        public float speed = 5f;
-
-        public float bulletLifetime = 20f;
+        public float bulletLifetime = 10f;
+        public int bulletDamage = 1;
 
         public void Update()
         {
-            transform.Translate(direction * (speed * Time.deltaTime));
+            bulletLifetime -= Time.deltaTime;
+            if (bulletLifetime <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void OnTriggerEnter(Collider other)
         {
-            // if (other.gameObject.tag == "Enemy")
-            // {
-            //     other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            //     Destroy(this);
-            // }            
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                other.GetComponent<Health>().currentHealth -= bulletDamage;
+                Destroy(this);
+            }
         }
     }
 }

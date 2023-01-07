@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Classic
 {
     public class Move : MonoBehaviour
     {
-        public float MoveSpeed;
-        
-        public void MovePerFrame(Vector3 direction)
-        {
-            transform.Translate(direction * MoveSpeed * Time.deltaTime);
+        public float moveSpeed;
+        public Vector3 direction;
+
+        public void Update()
+        {       
+            transform.Translate(direction * (moveSpeed * Time.deltaTime));
         }
     }
 }

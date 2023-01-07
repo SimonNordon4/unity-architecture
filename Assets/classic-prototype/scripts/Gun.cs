@@ -20,7 +20,7 @@ namespace Classic
             if (_timeSinceLastBullet > bulletCooldown)
             {
                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Bullet>().direction = direction;
+                bullet.GetComponent<Move>().direction = direction;
                 _timeSinceLastBullet = 0.0f;
             }
         }

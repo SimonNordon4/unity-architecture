@@ -8,15 +8,13 @@ namespace Classic
         public int maxHealth = 10;
         public int currentHealth = 0;
 
-        private void OnEnable()
+        private void Start()
         {
             currentHealth = maxHealth;
         }
 
-        private void TakeDamage(int damageAmount)
+        private void Update()
         {
-            currentHealth -= damageAmount;
-            
             if(currentHealth <= 0)
             {
                 Die();

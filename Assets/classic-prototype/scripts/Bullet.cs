@@ -22,7 +22,7 @@ namespace Classic
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.GetComponent<Health>().currentHealth -= bulletDamage;
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }

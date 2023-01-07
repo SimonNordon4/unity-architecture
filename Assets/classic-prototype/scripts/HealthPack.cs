@@ -5,7 +5,7 @@ namespace Classic
 {
     public class HealthPack : MonoBehaviour
     {
-        public PickupSpawner spawner;
+        public HealthPackSpawner spawner;
         public int healthAmount = 1;
         private void OnTriggerEnter(Collider other)
         {

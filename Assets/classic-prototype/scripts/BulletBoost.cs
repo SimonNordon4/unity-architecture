@@ -7,7 +7,7 @@ namespace Classic
 {
     public class BulletBoost : MonoBehaviour
     {
-        public PickupSpawner spawner;
+        public HealthPackSpawner spawner;
         public float cooldownReductionPercentage = 0.1f;
 
         private void OnTriggerEnter(Collider other)

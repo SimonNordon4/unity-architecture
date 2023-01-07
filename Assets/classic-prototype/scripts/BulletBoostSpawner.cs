@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Classic
 {
-    public class PickupSpawner : MonoBehaviour
+    public class BulletBoostSpawner : MonoBehaviour
     {
         public GameObject pickupPrefab;
         public Transform playerTransform;
@@ -39,7 +39,8 @@ namespace Classic
                     playerTransform.position;
                 spawnPosition.y = 0.5f;
                 
-                Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
+                var bulletBoost = Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
+                bulletBoost.GetComponent<HealthPack>().spawner = this;
             }
         }
     }

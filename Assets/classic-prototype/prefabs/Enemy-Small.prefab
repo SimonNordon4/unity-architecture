@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4360188958665171783}
   - component: {fileID: -387886918378887268}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy-Small
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,12 +32,12 @@ Transform:
   m_GameObject: {fileID: 8104070510711835173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 776150524354983963}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8104070510711835174
 MeshFilter:
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 45c1287da90b46048b1aee0759f6810d, type: 2}
+  - {fileID: 2100000, guid: 0e824f685f6df04439b04012591e2f62, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
   playerTransform: {fileID: 0}
-  damage: 1
+  damage: 2
 --- !u!114 &4360188958665171783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867e514625534809bf48a63c2e5ea254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 6
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &-387886918378887268
 MonoBehaviour:
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 313a436eef2c4d26a2d9f2b745a565f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 1
   currentHealth: 0
 --- !u!1001 &967419334915968374
 PrefabInstance:

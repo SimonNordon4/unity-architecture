@@ -6,13 +6,19 @@ namespace Classic
     public class EnemySpawner : MonoBehaviour
     {
         public GameObject enemyPrefab;
+        public GameObject smallEnemyPrefab;
+        public GameObject bigEnemyPrefab;
+
+        public float smallEnemySpawnChance = 0.1f;
+        public float bigEnemySpawnChance = 0.03f;
 
         public int enemiesToSpawn = 100;
 
         public int currentEnemies = 0;
-        public int maxCurrentEnemies = 15;
+        public int maxCurrentEnemies = 50;
 
         public float enemySpawnRate = 1f;
+        public float enemySpawnRateAcceleration = 0.05f;
         private float _timeSinceLastEnemySpawn = 0f;
 
         public Transform playerTransform;
@@ -41,13 +47,30 @@ namespace Classic
                     playerTransform.position;
                 spawnPosition.y = 1f;
 
-                var newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                var enemyToSpawn = enemyPrefab;
+                
+                // roll to see if we spawn a small enemy.
+                var spawnSmallEnemy = Random.Range(0,100) < smallEnemySpawnChance * 100f;
+                if (spawnSmallEnemy)
+                {
+                    enemyToSpawn = smallEnemyPrefab;
+                }
+
+                // roll to see if we spawn a big enemy.
+                var spawnBigEnemy = Random.Range(0,100) < bigEnemySpawnChance *100f;
+                if (spawnBigEnemy)
+                    enemyToSpawn = bigEnemyPrefab;
+
+                var newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
                 var newEnemyController = newEnemy.GetComponent<Enemy>();
                 newEnemyController.spawner = this;
                 newEnemyController.playerTransform = playerTransform;
                 
                 currentEnemies++;
                 enemiesToSpawn--;
+                
+                // decrease the spawn rate. 
+                enemySpawnRate *= 1-enemySpawnRateAcceleration;
             }
         }
 

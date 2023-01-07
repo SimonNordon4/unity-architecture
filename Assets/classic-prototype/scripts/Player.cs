@@ -40,17 +40,19 @@ namespace Classic
             _move.direction = moveDirection.normalized;
             
             // Bullet Firing
-            if (Input.GetMouseButton(0))
-            {
-                // get the hit position of a raycast from the mouse position
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            // if (Input.GetKey(KeyCode.Space))
+            // {
+            //
+            // }
+            
+            // get the hit position of a raycast from the mouse position
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
-                if (Physics.Raycast(ray, out var hit))
-                {
-                    var bulletDirection = hit.point - transform.position;
-                    bulletDirection.y = 0;
-                    _gun.FireBullet(bulletDirection.normalized);
-                }
+            if (Physics.Raycast(ray, out var hit))
+            {
+                var bulletDirection = hit.point - transform.position;
+                bulletDirection.y = 0;
+                _gun.FireBullet(bulletDirection.normalized);
             }
         }
     }

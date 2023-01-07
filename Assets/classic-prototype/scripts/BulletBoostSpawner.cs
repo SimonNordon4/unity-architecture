@@ -40,7 +40,7 @@ namespace Classic
                 spawnPosition.y = 0.5f;
                 
                 var bulletBoost = Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
-                bulletBoost.GetComponent<HealthPack>().spawner = this;
+                bulletBoost.GetComponent<BulletBoost>().spawner = this;
             }
         }
     }

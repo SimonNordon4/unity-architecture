@@ -14,8 +14,7 @@
 
 ### Classic-Plus:
 
-    Improves upon the classic architecture by introducing the Singleton Pattern, Object Pooling and improved
-    coding standards.
+    Improves upon the classic architecture by introducing the Singleton Pattern, Object Pooling, Interfaces and improved coding standards.
 
 ### Event-Driven:
 

@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  cooldownReductionPercentage: 0.1
+  cooldownReductionPercentage: 0.2

@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241f243b3a0941ed83e2d5ae610f5b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
   playerTransform: {fileID: 0}
   damage: 1
 --- !u!114 &4360188958665171783
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867e514625534809bf48a63c2e5ea254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &-387886918378887268
 MonoBehaviour:

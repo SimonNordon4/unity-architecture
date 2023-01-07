@@ -37,7 +37,7 @@ namespace Classic
                 moveDirection.z -= 1;
             }
 
-            _move.direction = moveDirection;
+            _move.direction = moveDirection.normalized;
             
             // Bullet Firing
             if (Input.GetMouseButton(0))

@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541456198eb66e340a329faa3adbc297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: classic-prototype-mainmenu
+  sceneName: classic-mainmenu
 --- !u!114 &1203117579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541456198eb66e340a329faa3adbc297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: classic-prototype-game-level3
+  sceneName: classic-game-level3
 --- !u!114 &1753939567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2999,7 +2999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541456198eb66e340a329faa3adbc297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: classic-prototype-mainmenu
+  sceneName: classic-mainmenu
 --- !u!1001 &552119799691521422
 PrefabInstance:
   m_ObjectHideFlags: 0

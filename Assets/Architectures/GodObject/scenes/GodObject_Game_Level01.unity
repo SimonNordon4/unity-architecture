@@ -849,7 +849,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf951327d614acb8c08dfab96985f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 580656570}
+  gameState: 1
+  player: {fileID: 580656570}
+  PlayerMoveSpeed: 5
+  playerMaxHealth: 15
+  playerCurrentHealth: 0
+  bulletPrefab: {fileID: -8589054112599419962, guid: dd7dd0f05f96dc34f8eea6c20e2faeb8, type: 3}
+  bulletCooldown: 2
+  bulletSpeed: 10
+  bulletLifeTime: 2
+  bulletDamage: 1
+  enemyPrefab: {fileID: 2564634279640424625, guid: 0774a5904750e1745b88d4e845e71695, type: 3}
+  smallEnemySpawnChance: 0.1
+  bigEnemySpawnChance: 0.03
+  enemiesToSpawn: 100
+  currentEnemies: 0
+  maxCurrentEnemies: 50
+  enemySpawnRate: 1
+  maxEnemySpawnRate: 0.1
+  minMaxSpawnDistance: {x: 5, y: 10}
+  enemy:
+    maxHealth: 2
+    moveSpeed: 4
+    damage: 1
+  smallEnemy:
+    maxHealth: 1
+    moveSpeed: 7
+    damage: 2
+  bigEnemy:
+    maxHealth: 15
+    moveSpeed: 3.9
+    damage: 5
 --- !u!1 &1194342451
 GameObject:
   m_ObjectHideFlags: 0

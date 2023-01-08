@@ -84,6 +84,16 @@ namespace GodObject
         
         #endregion
 
+        internal class BulletObject
+        {
+            public Bullet Bullet;
+        }
+        
+        internal class EnemyObject
+        {
+            public Enemy Enemy;
+        }
+
         void Start()
         {
             // initialise player
@@ -92,10 +102,12 @@ namespace GodObject
 
         private void Update()
         {
-            PlayerUpdate();
-            EnemySpawnerUpdate();
+            // must update collections before modifiying them.
             EnemyUpdate();
             BulletUpdate();
+            
+            PlayerUpdate();
+            EnemySpawnerUpdate();
         }
 
 
@@ -202,9 +214,12 @@ namespace GodObject
         
         private void BulletUpdate()
         {
-            foreach (var bullet in _bullets)
+            var bulletSpeed = this.bulletSpeed * Time.deltaTime;
+
+            for(int i=0; i < _bullets.Count; i++)
             {
                 // check the lifetime
+                var bullet = _bullets[i];
                 if (bullet.timeAlive > bulletLifeTime)
                 {
                     _bullets.Remove(bullet);
@@ -212,7 +227,7 @@ namespace GodObject
                 }
                 else
                 {
-                    Move(bullet.transform, bullet.direction, bulletSpeed);
+                    bullet.transform.Translate(bullet.direction * bulletSpeed);
                     bullet.timeAlive += Time.deltaTime;
                 }
             }
@@ -223,7 +238,7 @@ namespace GodObject
         #region reusable methods
         private void Move(Transform target, Vector3 direction, float moveSpeed)
             {
-                transform.Translate(direction * (moveSpeed * Time.deltaTime));
+                target.Translate(direction * (moveSpeed * Time.deltaTime));
             }
         
         #endregion

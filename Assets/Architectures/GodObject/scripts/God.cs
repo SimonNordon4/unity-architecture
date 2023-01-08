@@ -4,6 +4,7 @@ using Classic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace GodObject
 {
@@ -28,12 +29,12 @@ namespace GodObject
 
         [ReadOnly] public GameState gameState = GameState.Menu;
 
-        #region Player Variables
-        [Header("Player")]
-        public GameObject Player;
+        #region player Variables
+        [Header("player")]
+        public GameObject player;
         public float PlayerMoveSpeed = 5.0f;
-        public int maxHealth;
-        public int currentHealth;
+        public int playerMaxHealth;
+        public int playerCurrentHealth;
         #endregion
 
         #region Gun Variables
@@ -44,7 +45,7 @@ namespace GodObject
         public float bulletSpeed = 10.0f;
         public float bulletLifeTime = 2.0f;
         public int bulletDamage = 1;
-        public List<Bullet> bullets = new List<Bullet>();
+        private List<Bullet> _bullets = new List<Bullet>();
 
         #endregion
         
@@ -58,6 +59,7 @@ namespace GodObject
         // maximum enemies to spawn in level
         public int enemiesToSpawn = 100;
 
+        [ReadOnly]
         public int currentEnemies = 0;
         public int maxCurrentEnemies = 50;
 
@@ -67,8 +69,9 @@ namespace GodObject
         private float _enemySpawnRateIncrement = 0.0f;
         private float _timeSinceLastEnemySpawn = 0f;
 
-        public Transform playerTransform;
         public Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
+        
+        private List<Enemy> _enemies = new List<Enemy>();
         #endregion
         
         #region EnemyVariables
@@ -83,12 +86,15 @@ namespace GodObject
 
         void Start()
         {
-
+            // initialise player
+            playerCurrentHealth = playerMaxHealth;
         }
 
         private void Update()
         {
             PlayerUpdate();
+            EnemySpawnerUpdate();
+            EnemyUpdate();
             BulletUpdate();
         }
 
@@ -96,7 +102,7 @@ namespace GodObject
         
         private void PlayerUpdate()
         {
-            // Move the Player.
+            // Move the player.
             var moveDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.D))
             {
@@ -118,7 +124,7 @@ namespace GodObject
                 moveDirection.z -= 1;
             }
 
-            Move(Player.transform, moveDirection, PlayerMoveSpeed);
+            Move(player.transform, moveDirection, PlayerMoveSpeed);
 
             // Fire a bullet.
             if (Input.GetMouseButton(0))
@@ -135,7 +141,7 @@ namespace GodObject
                         var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                         bullet.direction = bulletDirection;
                         _timeSinceLastBullet = 0.0f;
-                        bullets.Add(bullet);
+                        _bullets.Add(bullet);
                     }
                 }
             }
@@ -143,22 +149,65 @@ namespace GodObject
         
         private void EnemySpawnerUpdate()
         {
-            
+            _timeSinceLastEnemySpawn += Time.deltaTime;
+            if (_timeSinceLastEnemySpawn >= enemySpawnRate && enemiesToSpawn > 0)
+            {
+                if (currentEnemies < maxCurrentEnemies)
+                {
+                    // create a random spawn position within the spawn area that is 1 away from the player position
+                    Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                    Vector3 randomWorldDirection = new Vector3(randomDirection.x, 0f, randomDirection.y);
+                    var randomDistance = Random.Range(minMaxSpawnDistance.x, minMaxSpawnDistance.y);
+                    Vector3 spawnPosition = randomDistance * randomWorldDirection + player.transform.position;
+
+                    var enemyData = enemy;
+                
+                    // roll to see if we spawn a small enemy.
+                    var spawnSmallEnemy = Random.Range(0,100) < smallEnemySpawnChance * 100f;
+                    if (spawnSmallEnemy)
+                    {
+                        enemyData = smallEnemy;
+                    }
+
+                    // roll to see if we spawn a big enemy.
+                    var spawnBigEnemy = Random.Range(0,100) < bigEnemySpawnChance *100f;
+                    if (spawnBigEnemy)
+                        enemyData = bigEnemy;
+                
+                    // create and initialise the enemy.
+                    var newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                    newEnemy.data = enemyData;
+                    newEnemy.currentHealth = enemyData.maxHealth;
+                    _enemies.Add(newEnemy);
+                    
+                    // update enemy data.
+                    currentEnemies++;
+                    enemiesToSpawn--;
+                
+                    // increase the spawn rate of the next enemy.
+                    enemySpawnRate -= _enemySpawnRateIncrement;
+                }
+                _timeSinceLastEnemySpawn = 0f;
+            }
         }
 
         private void EnemyUpdate()
         {
-            
+            foreach (var enemy in _enemies)  
+            {
+                var directionToPlayer = (player.transform.position - transform.position).normalized;
+                Move(enemy.transform, directionToPlayer, enemy.data.moveSpeed);
+            }
         }
         
         private void BulletUpdate()
         {
-            foreach (var bullet in bullets)
+            foreach (var bullet in _bullets)
             {
                 // check the lifetime
                 if (bullet.timeAlive > bulletLifeTime)
                 {
-                    bullets.Remove(bullet);
+                    _bullets.Remove(bullet);
                     Destroy(bullet.gameObject);
                 }
                 else
@@ -212,8 +261,8 @@ namespace GodObject
         [Serializable]
         public struct EnemyData
         {
-            public int health;
-            public float speed;
+            public int maxHealth;
+            public float moveSpeed;
             public int damage;
         }
     }

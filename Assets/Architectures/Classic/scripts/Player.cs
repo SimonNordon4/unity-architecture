@@ -18,7 +18,7 @@ namespace Classic
 
         public void Update()
         {
-            // Move the Player
+            // Move the player
             var moveDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.D))
             {

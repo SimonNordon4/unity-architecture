@@ -34,7 +34,7 @@ namespace Classic
         public void OnTriggerEnter(Collider other)
         {
             // if the player is entered, deal damage
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("player"))
             {
                 other.GetComponent<Health>().currentHealth -= damage;
 

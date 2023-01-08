@@ -79,8 +79,6 @@ namespace Classic
                 
                 // increase the spawn rate of the next enemy.
                 enemySpawnRate -= _enemySpawnRateIncrement;
-                
-                
             }
         }
 

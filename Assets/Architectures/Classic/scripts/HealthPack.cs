@@ -9,7 +9,7 @@ namespace Classic
         public int healthAmount = 1;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("player"))
             {
                 var playerHealth = other.GetComponent<Health>();
                 if (playerHealth.currentHealth < playerHealth.maxHealth)

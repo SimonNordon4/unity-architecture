@@ -124,6 +124,20 @@ namespace GodObject
             EnemySpawnerUpdate();
             EnemyUpdate();
             BulletUpdate();
+            CheckWinCondition();
+        }
+
+        private void CheckWinCondition()
+        {
+            if(enemiesToSpawn <= 0 && currentEnemies <= 0)
+            {
+                WinGame();
+            }
+        }
+
+        private void WinGame()
+        {
+            Debug.Log("You Win!");
         }
 
 

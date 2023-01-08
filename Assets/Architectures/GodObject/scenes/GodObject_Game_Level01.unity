@@ -850,13 +850,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 1
+  camera: {fileID: 963194228}
+  cameraOffset: {x: 0, y: 0, z: 0}
   player: {fileID: 580656570}
   PlayerMoveSpeed: 5
   playerMaxHealth: 15
   playerCurrentHealth: 0
   bulletPrefab: {fileID: -8589054112599419962, guid: dd7dd0f05f96dc34f8eea6c20e2faeb8, type: 3}
   bulletCooldown: 2
-  bulletSpeed: 10
+  bulletSpeed: 5
   bulletLifeTime: 2
   bulletDamage: 1
   enemyPrefab: {fileID: 2564634279640424625, guid: 0774a5904750e1745b88d4e845e71695, type: 3}

@@ -28,13 +28,17 @@ namespace GodObject
         }
 
         [ReadOnly] public GameState gameState = GameState.Menu;
+        public Transform camera;
+        public Vector3 cameraOffset;
 
-        #region player Variables
-        [Header("player")]
+        #region Player Variables
+        
+        [Header("Player")]
         public GameObject player;
         public float PlayerMoveSpeed = 5.0f;
         public int playerMaxHealth;
         public int playerCurrentHealth;
+        
         #endregion
 
         #region Gun Variables
@@ -98,16 +102,17 @@ namespace GodObject
         {
             // initialise player
             playerCurrentHealth = playerMaxHealth;
+            
+            // initialise camera
+            cameraOffset = camera.transform.position;
         }
 
         private void Update()
         {
-            // must update collections before modifiying them.
-            EnemyUpdate();
-            BulletUpdate();
-            
             PlayerUpdate();
             EnemySpawnerUpdate();
+            EnemyUpdate();
+            BulletUpdate();
         }
 
 
@@ -137,21 +142,27 @@ namespace GodObject
             }
 
             Move(player.transform, moveDirection, PlayerMoveSpeed);
+            
+            // lock the camera to the player
+            camera.transform.position = player.transform.position + cameraOffset;
 
+            _timeSinceLastBullet += Time.deltaTime;
             // Fire a bullet.
             if (Input.GetMouseButton(0))
             {
+                
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(ray, out var hit))
                 {
-                    var bulletDirection = hit.point - transform.position;
+                    var bulletDirection = hit.point - player.transform.position;
                     bulletDirection.y = 0;
 
                     if (_timeSinceLastBullet > bulletCooldown)
                     {
-                        var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                        bullet.direction = bulletDirection;
+                        Debug.Log("Bulleto");
+                        var bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+                        bullet.direction = bulletDirection.normalized;
                         _timeSinceLastBullet = 0.0f;
                         _bullets.Add(bullet);
                     }
@@ -205,16 +216,17 @@ namespace GodObject
 
         private void EnemyUpdate()
         {
-            foreach (var enemy in _enemies)  
+            foreach (var enemy1 in _enemies)  
             {
-                var directionToPlayer = (player.transform.position - transform.position).normalized;
-                Move(enemy.transform, directionToPlayer, enemy.data.moveSpeed);
+                var enemyTransform = enemy1.transform;
+                var directionToPlayer = (player.transform.position - enemyTransform.position).normalized;
+                Move(enemyTransform, directionToPlayer, enemy1.data.moveSpeed);
             }
         }
         
         private void BulletUpdate()
         {
-            var bulletSpeed = this.bulletSpeed * Time.deltaTime;
+            var speed = this.bulletSpeed * Time.deltaTime;
 
             for(int i=0; i < _bullets.Count; i++)
             {
@@ -227,7 +239,7 @@ namespace GodObject
                 }
                 else
                 {
-                    bullet.transform.Translate(bullet.direction * bulletSpeed);
+                    bullet.transform.Translate(bullet.direction * speed);
                     bullet.timeAlive += Time.deltaTime;
                 }
             }
@@ -238,7 +250,7 @@ namespace GodObject
         #region reusable methods
         private void Move(Transform target, Vector3 direction, float moveSpeed)
             {
-                target.Translate(direction * (moveSpeed * Time.deltaTime));
+                target.Translate(direction.normalized * (moveSpeed * Time.deltaTime));
             }
         
         #endregion

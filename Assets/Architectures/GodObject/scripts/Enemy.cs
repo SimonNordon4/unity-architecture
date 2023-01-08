@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GodObject
 {
     public class Enemy : MonoBehaviour
     {
-        public int currentHealth;
-        public EnemyData data;
+        public God.EnemyObject Parent;
+        public void OnTriggerEnter(Collider other)
+        {
+            God.Instance.EnemyHit(this, other);
+        }
     }
 }

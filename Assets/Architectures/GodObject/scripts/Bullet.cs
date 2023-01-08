@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GodObject
 {
     public class Bullet : MonoBehaviour
     {
-        public Vector3 direction;
-        public float timeAlive = 0.0f;
+        public void OnTriggerEnter(Collider other)
+        {
+            God.Instance.BulletHit(this, other);
+        }
     }
 }

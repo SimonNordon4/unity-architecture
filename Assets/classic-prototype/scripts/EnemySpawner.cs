@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,26 +6,35 @@ namespace Classic
 {
     public class EnemySpawner : MonoBehaviour
     {
+        // Enemy types we want to spawn
         public GameObject enemyPrefab;
         public GameObject smallEnemyPrefab;
         public GameObject bigEnemyPrefab;
 
+        // Probabilities of each enemy type spawning
         public float smallEnemySpawnChance = 0.1f;
         public float bigEnemySpawnChance = 0.03f;
 
+        // maximum enemies to spawn in level
         public int enemiesToSpawn = 100;
 
         public int currentEnemies = 0;
         public int maxCurrentEnemies = 50;
 
         public float enemySpawnRate = 1f;
-        public float enemySpawnRateAcceleration = 0.05f;
+        // every time an enemy spawns, the next enemy will spawn slightly faster.
+        public float maxEnemySpawnRate = 0.1f;
+        private float _enemySpawnRateIncrement = 0.0f;
         private float _timeSinceLastEnemySpawn = 0f;
 
         public Transform playerTransform;
         public Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
 
-        // Update is called once per frame
+        private void Start()
+        {
+            _enemySpawnRateIncrement = (enemySpawnRate - maxEnemySpawnRate) / enemiesToSpawn;
+        }
+
         void Update()
         {
             _timeSinceLastEnemySpawn += Time.deltaTime;
@@ -67,8 +77,10 @@ namespace Classic
                 currentEnemies++;
                 enemiesToSpawn--;
                 
-                // decrease the spawn rate. 
-                enemySpawnRate *= 1-enemySpawnRateAcceleration;
+                // increase the spawn rate of the next enemy.
+                enemySpawnRate -= _enemySpawnRateIncrement;
+                
+                
             }
         }
 

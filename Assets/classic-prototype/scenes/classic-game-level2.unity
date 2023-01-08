@@ -2825,11 +2825,11 @@ MonoBehaviour:
   bigEnemyPrefab: {fileID: 8104070510711835173, guid: 329dd047b684e424bb5febd21cc6d033, type: 3}
   smallEnemySpawnChance: 0.15
   bigEnemySpawnChance: 0.03
-  enemiesToSpawn: 75
+  enemiesToSpawn: 25
   currentEnemies: 0
   maxCurrentEnemies: 15
-  enemySpawnRate: 2
-  enemySpawnRateAcceleration: 0.035
+  enemySpawnRate: 1
+  maxEnemySpawnRate: 0.5
   playerTransform: {fileID: 580656574}
   minMaxSpawnDistance: {x: 12, y: 15}
 --- !u!1 &1847367322

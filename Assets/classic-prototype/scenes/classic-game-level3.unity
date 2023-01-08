@@ -1965,7 +1965,7 @@ MonoBehaviour:
   playerTransform: {fileID: 580656574}
   maxConcurrentPickups: 15
   concurrentPickups: 0
-  spawnInterval: 2.4
+  spawnInterval: 4.5
   minMaxSpawnDistance: {x: 10, y: 30}
 --- !u!1 &1627162000
 GameObject:
@@ -2405,11 +2405,11 @@ MonoBehaviour:
   bigEnemyPrefab: {fileID: 8104070510711835173, guid: 329dd047b684e424bb5febd21cc6d033, type: 3}
   smallEnemySpawnChance: 0.3
   bigEnemySpawnChance: 0.1
-  enemiesToSpawn: 150
+  enemiesToSpawn: 50
   currentEnemies: 0
   maxCurrentEnemies: 50
-  enemySpawnRate: 1.5
-  enemySpawnRateAcceleration: 0.025
+  enemySpawnRate: 2
+  maxEnemySpawnRate: 0.1
   playerTransform: {fileID: 580656574}
   minMaxSpawnDistance: {x: 15, y: 15}
 --- !u!1 &1847367322

@@ -11,32 +11,50 @@ namespace Classic
         public float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
 
-        private void Start()
-        {
-            
-        }
-
         private void Update()
         {
             _timeSinceLastBullet += Time.deltaTime;
-        }
-
-        public void FireBullet(Vector3 direction)
-        {
-            // find the closet enemy.
-            var results = new Collider[100];
-            var enemies = Physics.OverlapSphereNonAlloc(transform.position,
-                range,
-                results);
-
-            Debug.Log("enemies size: " + enemies);
-            
             if (_timeSinceLastBullet > bulletCooldown)
             {
-                var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                bullet.GetComponent<Move>().direction = direction;
+                FireBullet();
                 _timeSinceLastBullet = 0.0f;
             }
+        }
+
+        public void FireBullet()
+        {
+            // find the closet enemy.
+            var results = new Collider[128];
+            var enemies = Physics.OverlapSphereNonAlloc(transform.position,
+                range,
+                results,
+                Physics.AllLayers,
+                QueryTriggerInteraction.Collide);
+
+            Transform closestEnemy = null;
+            float closestEnemyDistance = float.PositiveInfinity;
+            
+            for(int i = 0; i < enemies; i++)
+            {
+                if (results[i].gameObject.CompareTag("Enemy"))
+                {
+                    var distance = Vector3.Distance(transform.position, results[i].transform.position);
+                    
+                    if (distance < closestEnemyDistance)
+                    {
+                        closestEnemy = results[i].transform;
+                        closestEnemyDistance = distance;
+                    }
+                }
+            }
+
+            if (closestEnemy == null)
+                return;
+            
+            var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Move>().direction = (closestEnemy.position - transform.position).normalized;
+            _timeSinceLastBullet = 0.0f;
+     
         }
     }
 }

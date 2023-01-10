@@ -12,7 +12,7 @@ namespace Classic
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("player"))
+            if (other.gameObject.CompareTag("Player"))
             {
                 // Reduce the players bullet cooldown by a percentage of its current value.
                 var playerGun = other.GetComponent<Gun>();

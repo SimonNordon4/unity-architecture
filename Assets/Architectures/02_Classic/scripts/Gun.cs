@@ -8,7 +8,13 @@ namespace Classic
     {
         public GameObject bulletPrefab;
         public float bulletCooldown = 1f;
+        public float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
+
+        private void Start()
+        {
+            
+        }
 
         private void Update()
         {
@@ -17,6 +23,14 @@ namespace Classic
 
         public void FireBullet(Vector3 direction)
         {
+            // find the closet enemy.
+            var results = new Collider[100];
+            var enemies = Physics.OverlapSphereNonAlloc(transform.position,
+                range,
+                results);
+
+            Debug.Log("enemies size: " + enemies);
+            
             if (_timeSinceLastBullet > bulletCooldown)
             {
                 var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);

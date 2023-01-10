@@ -1079,17 +1079,18 @@ MonoBehaviour:
   PlayerMoveSpeed: 5
   playerMaxHealth: 15
   playerCurrentHealth: 0
+  gunRange: 5
   bulletPrefab: {fileID: -8589054112599419962, guid: dd7dd0f05f96dc34f8eea6c20e2faeb8, type: 3}
   bulletCooldown: 0.5
   bulletSpeed: 10
   bulletLifeTime: 2
   bulletDamage: 1
   enemyPrefab: {fileID: 2564634279640424625, guid: 0774a5904750e1745b88d4e845e71695, type: 3}
-  enemiesToSpawn: 50
+  enemiesToSpawn: 25
   currentEnemies: 0
-  maxCurrentEnemies: 15
+  maxCurrentEnemies: 8
   enemySpawnRate: 1
-  maxEnemySpawnRate: 0.1
+  minEnemySpawnRate: 0.2
   minMaxSpawnDistance: {x: 5, y: 10}
   HealthText: {fileID: 546101929}
   CurrentEnemiesText: {fileID: 906302859}

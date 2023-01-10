@@ -42,14 +42,14 @@ namespace MonoScript
         public Enemy enemyPrefab;
         // maximum enemies to spawn in level
         public int enemiesToSpawn = 100;
+
         public int currentEnemies = 0;
         public int maxCurrentEnemies = 50;
 
         public float enemySpawnRate = 1f;
-
-        // every time an enemy spawns, the next enemy will spawn slightly faster.
-        public float maxEnemySpawnRate = 0.1f;
-        private float _enemySpawnRateIncrement = 0.0f;
+        public float minEnemySpawnRate;
+        
+        private float _enemySpawnRateIncrement;
         private float _timeSinceLastEnemySpawn = 0f;
 
         public Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
@@ -61,6 +61,7 @@ namespace MonoScript
         public TextMeshProUGUI CurrentEnemiesText;
         public GameObject GameOverScreen;
         public TextMeshProUGUI GameOverText;
+        
 
         void Start()
         {
@@ -69,6 +70,9 @@ namespace MonoScript
 
             // initialise camera
             cameraOffset = camera.transform.position;
+            
+            // calculate our enemy spawn rate increment
+            _enemySpawnRateIncrement = (enemySpawnRate - minEnemySpawnRate) / enemiesToSpawn;
         }
 
         private void Update()
@@ -78,6 +82,7 @@ namespace MonoScript
                 PlayerUpdate();
                 EnemySpawnerUpdate();
                 EnemyUpdate();
+                GunUpdate();
                 BulletUpdate();
                 CheckWinCondition();
                 UpdateUI();
@@ -104,7 +109,7 @@ namespace MonoScript
             // lock the camera to the player
             camera.transform.position = player.transform.position + cameraOffset;
 
-            _timeSinceLastBullet += Time.deltaTime;
+            
         }
         private void EnemySpawnerUpdate()
         {
@@ -147,6 +152,7 @@ namespace MonoScript
 
         private void GunUpdate()
         {
+            _timeSinceLastBullet += Time.deltaTime;
             // get closest enemy
             Enemy closestEnemy = null;
             float closestEnemyDistance = float.PositiveInfinity;

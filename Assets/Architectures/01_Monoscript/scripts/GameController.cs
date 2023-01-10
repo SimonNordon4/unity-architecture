@@ -27,12 +27,14 @@ namespace MonoScript
 
         [Header("Gun")] 
         
+        public float gunRange = 5f;
         public Bullet bulletPrefab;
         public float bulletCooldown;
         private float _timeSinceLastBullet = float.PositiveInfinity;
         public float bulletSpeed = 10.0f;
         public float bulletLifeTime = 2.0f;
         public int bulletDamage = 1;
+        
         private List<Bullet> _bullets = new List<Bullet>();
 
         [Header("Enemy Spawner")] 
@@ -103,26 +105,6 @@ namespace MonoScript
             camera.transform.position = player.transform.position + cameraOffset;
 
             _timeSinceLastBullet += Time.deltaTime;
-            // Fire a bullet.
-            if (Input.GetMouseButton(0))
-            {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out var hit))
-                {
-                    var bulletDirection = hit.point - player.transform.position;
-                    bulletDirection.y = 0;
-
-                    if (_timeSinceLastBullet > bulletCooldown)
-                    {
-                        var bullet = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
-                        bullet.direction = bulletDirection.normalized;
-                        bullet.gameController = this;
-                        _timeSinceLastBullet = 0.0f;
-                        _bullets.Add(bullet);
-                    }
-                }
-            }
         }
         private void EnemySpawnerUpdate()
         {
@@ -162,10 +144,45 @@ namespace MonoScript
                 enemyTransform.Translate( directionToPlayer * (enemy.moveSpeed * Time.deltaTime));
             }
         }
+
+        private void GunUpdate()
+        {
+            // get closest enemy
+            Enemy closestEnemy = null;
+            float closestEnemyDistance = float.PositiveInfinity;
+            foreach (var enemy in _enemies)
+            {
+                var distanceToEnemy = Vector3.Distance(player.transform.position, enemy.transform.position);
+                if (distanceToEnemy < closestEnemyDistance)
+                {
+                    closestEnemy = enemy;
+                    closestEnemyDistance = distanceToEnemy;
+                }
+            }
+            
+            // Check if we've come off cooldown.
+            if (_timeSinceLastBullet > bulletCooldown)
+            {
+                if (closestEnemy != null)
+                {
+                    var enemyDistance = Vector3.Distance(player.transform.position, 
+                        closestEnemy.transform.position);
+                    
+                    if (enemyDistance < gunRange)
+                    {
+                        var playerPosition = player.transform.position;
+                        var bullet = Instantiate(bulletPrefab, playerPosition, Quaternion.identity);
+                        bullet.direction = (closestEnemy.transform.position - playerPosition).normalized;
+                        bullet.gameController = this;
+                        _timeSinceLastBullet = 0.0f;
+                        _bullets.Add(bullet);
+                    }
+                }
+            }
+        }
         private void BulletUpdate()
         {
             var speed = bulletSpeed * Time.deltaTime;
-
             for (int i = 0; i < _bullets.Count; i++)
             {
                 // check the lifetime

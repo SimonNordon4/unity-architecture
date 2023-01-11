@@ -1,5 +1,4 @@
-﻿using Architectures.MonoScript;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Architecture.MonoScript
 {

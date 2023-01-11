@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Architectures.MonoScript
+namespace Architecture.MonoScript
 {
     /// Simple Class that contains data, and informs the GameController OnTriggerEnter
     public class Enemy : MonoBehaviour

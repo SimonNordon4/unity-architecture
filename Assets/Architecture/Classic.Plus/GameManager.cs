@@ -6,7 +6,10 @@ using UnityEngine.Assertions;
 namespace Architecture.Classic.Plus
 {
     /// <summary>
-    /// Monitors and controls the state of the gameplay level.
+    /// In this example we've transformed the GameManager into a Singleton. Making it globally accessible.
+    /// It's generally okay to make a Singleton of an object when there's only ever meant to be a single instance.
+    /// We could also have made the Player a Singleton as well, however if have other objects access the Player
+    /// through the Game Manager Singleton, it means we have a central source of global level state.
     /// </summary>
     public class GameManager : MonoBehaviour
     {
@@ -34,7 +37,7 @@ namespace Architecture.Classic.Plus
         }
         
         [field: SerializeField]
-        public GameState CurrentGameState { get; private set; }
+        public GameState CurrentGameState { get; private set; } = GameState.None;
         
         // public Health playerHealth;
         [field: SerializeField]

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2272617913446532704}
   - component: {fileID: 2272617913446532711}
   - component: {fileID: 8057363093810620759}
-  - component: {fileID: 2947597604155083995}
-  - component: {fileID: -6918533202449355917}
-  m_Layer: 0
+  - component: {fileID: -7075583670536678488}
+  - component: {fileID: -4255396140072562850}
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &2947597604155083995
+--- !u!114 &-7075583670536678488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BulletLifetime>k__BackingField: 10
-  <bulletDamage>k__BackingField: 1
---- !u!114 &-6918533202449355917
+  <BulletDamage>k__BackingField: 1
+--- !u!114 &-4255396140072562850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6096f59800cd2dc4f838a765c3beb51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  direction: {x: 0, y: 0, z: 0}
+  <MoveSpeed>k__BackingField: 5

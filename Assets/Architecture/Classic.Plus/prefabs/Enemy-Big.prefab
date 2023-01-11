@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8229523665868018101}
   - component: {fileID: 4360188958665171783}
   - component: {fileID: -387886918378887268}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy-Big
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -154,6 +154,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   playerTransform: {fileID: 0}
   damage: 5
+  dieOnTouch: 0
 --- !u!114 &4360188958665171783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,9 +191,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8104070510711835177}
     m_Modifications:
+    - target: {fileID: 552119798631738809, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 552119798734605528, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 552119799437309292, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 552119799437309292, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 552119799437309293, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
       propertyPath: m_RootOrder
@@ -237,6 +250,14 @@ PrefabInstance:
     - target: {fileID: 552119799437309293, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552119800114959064, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 552119800303676890, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

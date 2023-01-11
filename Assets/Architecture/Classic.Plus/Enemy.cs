@@ -25,12 +25,26 @@ namespace Architecture.Classic.Plus
 
         public void Update()
         {
+            
+            if(GameManager.Instance.CurrentGameState != GameManager.GameState.Active)
+                return;
+            
             var directionToPlayer = (playerTransform.position - transform.position).normalized;
             _move.Direction = directionToPlayer;
 
             if (_health.currentHealth <= 0)
             {
-                spawner.currentEnemies--;
+                
+            }
+        }
+        
+        public void ApplyDamage(int amount)
+        {
+            _health.currentHealth -= amount;
+            if( _health.currentHealth <=0 )
+            {
+                Destroy(this);
+                GameManager.Instance.EnemySpawner.currentEnemies--;
             }
         }
 

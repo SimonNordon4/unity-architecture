@@ -12,18 +12,5 @@ namespace Architecture.Classic.Plus
         {
             currentHealth = maxHealth;
         }
-
-        private void Update()
-        {
-            if(currentHealth <= 0)
-            {
-                Die();
-            }
-        }
-
-        private void Die()
-        {
-            Destroy(gameObject);
-        }
     }
 }

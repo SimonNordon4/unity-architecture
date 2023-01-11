@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MonoScript
+namespace Architectures.MonoScript
 {
+    /// Simple Class that contains data, and informs the GameController OnTriggerEnter
     public class Enemy : MonoBehaviour
     {
         public GameController gameController;

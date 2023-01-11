@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-namespace MonoScript
+namespace Architectures.MonoScript
 {
     /// <summary>
     /// Controls the game logic for this scene.

@@ -1,8 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// Monitors and controls the state of the gameplay level.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         public Health playerHealth;
@@ -13,6 +16,7 @@ namespace Classic
 
         public void Update()
         {
+            // Check for a win or lose condition on every frame.
             if (enemySpawner.enemiesToSpawn <= 0 && enemySpawner.currentEnemies <= 0)
             {
                 EndGame();
@@ -26,10 +30,13 @@ namespace Classic
             }
         }
         
+        /// <summary>
+        /// Ends the game by destroying or disabling ever game-object in the scene.
+        /// </summary>
         private void EndGame()
         {
             // disable the camera follower.
-            Camera.main.GetComponent<FollowTransform>().enabled = false;
+            Camera.main.GetComponent<FollowPosition>().enabled = false;
             
             // disable the spawners
             enemySpawner.enabled = false;

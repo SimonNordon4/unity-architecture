@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
     public class Player : MonoBehaviour
     {

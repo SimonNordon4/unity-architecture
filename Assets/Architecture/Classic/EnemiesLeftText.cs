@@ -2,8 +2,11 @@
 using TMPro;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// Polls an enemy spawner component and displays the number of enemies remaining.
+    /// </summary>
     public class EnemiesLeftText : MonoBehaviour
     {
         public EnemySpawner enemySpawner;

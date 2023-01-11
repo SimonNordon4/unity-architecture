@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
     public class HealthPack : MonoBehaviour
     {

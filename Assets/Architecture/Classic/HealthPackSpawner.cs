@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
     public class HealthPackSpawner : MonoBehaviour
     {

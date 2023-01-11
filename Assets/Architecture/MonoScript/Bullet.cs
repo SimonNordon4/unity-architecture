@@ -1,8 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MonoScript
+namespace Architecture.MonoScript
 {
+    /// Simple Class that contains per enemy data, and informs the GameController On Collision.
     public class Bullet : MonoBehaviour
     {
         public GameController gameController;

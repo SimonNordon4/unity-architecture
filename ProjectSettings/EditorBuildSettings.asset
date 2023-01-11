@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Architectures/01_Monoscript/scenes/GodObject_Menu.unity
     guid: df724231353f65446a34fceb0a42540b
   - enabled: 1
-    path: Assets/Architectures/01_Monoscript/scenes/Monoscript.unity
+    path: Assets/Architectures/Monoscript/scenes/Monoscript.unity
     guid: 8c296ae3c3cc1e14d9a11b94a296d03f
   m_configObjects: {}

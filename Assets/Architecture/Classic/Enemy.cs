@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
     public class Enemy : MonoBehaviour
     {
@@ -27,7 +27,7 @@ namespace Classic
 
             if (_health.currentHealth <= 0)
             {
-                spawner.EnemyDied();
+                spawner.currentEnemies--;
             }
         }
 
@@ -40,7 +40,7 @@ namespace Classic
 
                 if (dieOnTouch)
                 {
-                    spawner.EnemyDied();
+                    spawner.currentEnemies--;
                     Destroy(gameObject);
                 }
             }

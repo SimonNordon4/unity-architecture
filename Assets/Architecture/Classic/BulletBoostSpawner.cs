@@ -1,7 +1,10 @@
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// Spawns bullet boosts at set intervals.
+    /// </summary>
     public class BulletBoostSpawner : MonoBehaviour
     {
         public GameObject pickupPrefab;
@@ -31,7 +34,7 @@ namespace Classic
             {
                 concurrentPickups++;
                 
-                // create a random spawn position within the spawn area that is 1 away from the player position
+                // Create a random spawn position within the spawn area that is 1 away from the player position.
                 Vector2 randomDirection = Random.insideUnitCircle.normalized;
                 Vector3 randomWorldDirection = new Vector3(randomDirection.x, 0f, randomDirection.y);
                 Vector3 spawnPosition =

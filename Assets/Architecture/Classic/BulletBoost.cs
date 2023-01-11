@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// A pickup for the player which increases the gun cooldown.
+    /// </summary>
     public class BulletBoost : MonoBehaviour
     {
         public BulletBoostSpawner spawner;

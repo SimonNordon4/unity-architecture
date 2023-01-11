@@ -2,7 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
     public class Gun : MonoBehaviour
     {
@@ -16,45 +16,40 @@ namespace Classic
             _timeSinceLastBullet += Time.deltaTime;
             if (_timeSinceLastBullet > bulletCooldown)
             {
-                FireBullet();
-                _timeSinceLastBullet = 0.0f;
-            }
-        }
+                // Find the closet enemy.
+                var results = new Collider[128];
+                var enemies = Physics.OverlapSphereNonAlloc(transform.position,
+                    range,
+                    results,
+                    Physics.AllLayers,
+                    QueryTriggerInteraction.Collide);
 
-        public void FireBullet()
-        {
-            // find the closet enemy.
-            var results = new Collider[128];
-            var enemies = Physics.OverlapSphereNonAlloc(transform.position,
-                range,
-                results,
-                Physics.AllLayers,
-                QueryTriggerInteraction.Collide);
-
-            Transform closestEnemy = null;
-            float closestEnemyDistance = float.PositiveInfinity;
+                Transform closestEnemy = null;
+                float closestEnemyDistance = float.PositiveInfinity;
             
-            for(int i = 0; i < enemies; i++)
-            {
-                if (results[i].gameObject.CompareTag("Enemy"))
+                for(int i = 0; i < enemies; i++)
                 {
-                    var distance = Vector3.Distance(transform.position, results[i].transform.position);
-                    
-                    if (distance < closestEnemyDistance)
+                    if (results[i].gameObject.CompareTag("Enemy"))
                     {
-                        closestEnemy = results[i].transform;
-                        closestEnemyDistance = distance;
+                        var distance = Vector3.Distance(transform.position, results[i].transform.position);
+                    
+                        if (distance < closestEnemyDistance)
+                        {
+                            closestEnemy = results[i].transform;
+                            closestEnemyDistance = distance;
+                        }
                     }
                 }
-            }
 
-            if (closestEnemy == null)
-                return;
-            
-            var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Move>().direction = (closestEnemy.position - transform.position).normalized;
-            _timeSinceLastBullet = 0.0f;
-     
+                // Only fire a bullet if an enemy was found.
+                if (closestEnemy != null)
+                {
+                    var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                    bullet.GetComponent<Move>().direction = (closestEnemy.position - transform.position).normalized;
+                    _timeSinceLastBullet = 0.0f;
+                    _timeSinceLastBullet = 0.0f;
+                }
+            }
         }
     }
 }

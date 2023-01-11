@@ -2,8 +2,11 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// A UI element that displays a parents Health Component Data.
+    /// </summary>
     public class HealthBar : MonoBehaviour
     {
         private Health _health;

@@ -2,8 +2,11 @@
 using TMPro;
 using UnityEngine;
 
-namespace Classic
+namespace Architecture.Classic
 {
+    /// <summary>
+    /// Polls a gun component and displays its current cooldown.
+    /// </summary>
     public class BulletCooldownText : MonoBehaviour
     {
         public Gun gun;

@@ -27,13 +27,14 @@ namespace Architecture.Classic.Plus
         private float _enemySpawnRateIncrement = 0.0f;
         private float _timeSinceLastEnemySpawn = 0f;
 
-        public Transform playerTransform;
+        private Transform _playerTransform;
         public Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
 
         private void Start()
         {
             // Initialise by calculating the decrement in spawn rate per enemy spawn.
             _enemySpawnRateIncrement = (enemySpawnRate - maxEnemySpawnRate) / enemiesToSpawn;
+            _playerTransform = GameManager.Instance.PlayerTransform;
         }
 
         void Update()
@@ -48,7 +49,7 @@ namespace Architecture.Classic.Plus
                     Vector2 randomDirection = Random.insideUnitCircle.normalized;
                     Vector3 randomWorldDirection = new Vector3(randomDirection.x, 0f, randomDirection.y);
                     var randomDistance = Random.Range(minMaxSpawnDistance.x, minMaxSpawnDistance.y);
-                    Vector3 spawnPosition = randomDistance * randomWorldDirection + playerTransform.position;
+                    Vector3 spawnPosition = randomDistance * randomWorldDirection + _playerTransform.position;
 
                     var enemyToSpawn = enemyPrefab;
                 
@@ -67,7 +68,7 @@ namespace Architecture.Classic.Plus
                     var newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
                     var newEnemyController = newEnemy.GetComponent<Enemy>();
                     newEnemyController.spawner = this;
-                    newEnemyController.playerTransform = playerTransform;
+                    newEnemyController.playerTransform = _playerTransform;
                 
                     currentEnemies++;
                     enemiesToSpawn--;

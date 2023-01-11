@@ -4,7 +4,7 @@ namespace Architecture.Classic.Plus
 {
     public class HealthPackSpawner : MonoBehaviour
     {
-        public GameObject pickupPrefab;
+        public HealthPack pickupPrefab;
         public Transform playerTransform;
 
         public int maxConcurrentPickups = 3;
@@ -40,7 +40,7 @@ namespace Architecture.Classic.Plus
                 spawnPosition.y = 0.5f;
                 
                 var healthPack = Instantiate(pickupPrefab, spawnPosition, Quaternion.identity);
-                healthPack.GetComponent<HealthPack>().spawner = this;
+                healthPack.spawner = this;
             }
         }
     }

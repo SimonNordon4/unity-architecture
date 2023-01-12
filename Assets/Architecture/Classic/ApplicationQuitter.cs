@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Architecture.Classic
 {
-    public class Quit : MonoBehaviour
+    public class ApplicationQuitter : MonoBehaviour
     {
         public void QuitGame()
         {

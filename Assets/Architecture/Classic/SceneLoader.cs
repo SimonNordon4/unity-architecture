@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Architecture.Classic
 {
-    public class LoadScene : MonoBehaviour
+    public class SceneLoader : MonoBehaviour
     {
         public string sceneName;
         public void LoadGameScene()

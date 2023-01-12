@@ -36,7 +36,7 @@ namespace Architecture.Classic
         private void EndGame()
         {
             // disable the camera follower.
-            Camera.main.GetComponent<FollowPosition>().enabled = false;
+            Camera.main.GetComponent<PositionFollower>().enabled = false;
             
             // disable the spawners
             enemySpawner.enabled = false;

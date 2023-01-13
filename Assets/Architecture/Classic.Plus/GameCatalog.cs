@@ -29,6 +29,7 @@ namespace Architecture.Classic.Plus
         [field: SerializeField] public EnemySpawner EnemySpawner { get; private set; }
         
         [field: SerializeField] public GameUI UI { get; private set; }
+        [field: SerializeField] public ApplicationInterface App { get; private set; }
 
     }
 }

@@ -38,7 +38,7 @@ namespace Architecture.Classic.Plus
         // from their interface with the current Architecture.
         private void OnDestroy()
         {
-            GameCatalog.Instance.GameInterface.LoseGame();  
+            GameCatalog.Instance.GameInterface.LoseGame();
         }
     }
 }

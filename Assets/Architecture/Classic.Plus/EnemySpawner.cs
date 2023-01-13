@@ -81,6 +81,11 @@ namespace Architecture.Classic.Plus
         public void EnemyDied()
         {
             CurrentEnemies--;
+
+            if (EnemiesToSpawn + CurrentEnemies <= 0)
+            {
+                GameCatalog.Instance.GameInterface.WinGame();
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Architecture.Classic.Plus;
 using TMPro;
 using UnityEngine;
 
@@ -13,13 +15,26 @@ public class GameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _gunCoolDownText;
     [SerializeField] private TextMeshProUGUI _enemiesRemainingText;
     
+    private EnemySpawner _enemySpawner;
+    private Gun _gun;
+    
     private void Start()
     {
         _winScreen.SetActive(false);
         _loseScreen.SetActive(false);
         _pauseScreen.SetActive(false);
+        
+        _enemySpawner = GameCatalog.Instance.EnemySpawner;
+        _gun = GameCatalog.Instance.Player.GetComponent<Gun>();
+        UpdateLevelText(1);
     }
-    
+
+    private void Update()
+    {
+        UpdateGunCoolDownText(_gun.bulletCooldown);
+        UpdateEnemiesRemainingText(_enemySpawner.CurrentEnemies + _enemySpawner.EnemiesToSpawn);
+    }
+
     public void UpdateLevelText(int level)
     {
         _levelText.text = "Level: " + level;

@@ -36,7 +36,7 @@ namespace Architecture.Classic.Plus
             }
         }
 
-        public void StartGame()
+        public void OnStartGame()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -44,22 +44,25 @@ namespace Architecture.Classic.Plus
         public void ResumeGame()
         {
             _state.SetState(GameState.State.Active);
+            GameCatalog.Instance.UI.HidePauseScreen();
         }
         
         public void PauseGame()
         {
             _state.SetState(GameState.State.Paused);
+            GameCatalog.Instance.UI.ShowPauseScreen();
         }
 
         public void WinGame()
         {
             _state.SetState(GameState.State.Finished);
-            
+            GameCatalog.Instance.UI.ShowWinScreen();
         }
 
         public void LoseGame()
         {
             _state.SetState(GameState.State.Finished);
+            GameCatalog.Instance.UI.ShowLoseScreen();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Architecture.Classic.Plus
             offset = transform.position;
         }
 
-        void Update()
+        void LateUpdate()
         {
             transform.position = target.position + offset;
         }

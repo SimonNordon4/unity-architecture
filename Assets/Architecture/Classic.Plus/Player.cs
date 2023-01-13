@@ -20,10 +20,6 @@ namespace Architecture.Classic.Plus
 
         public void Update()
         {
-            // Only update player movement if we're in an active state.
-            if (GameManager.Instance.CurrentGameState != GameManager.GameState.Active)
-                return;
-            
             // Move the player
             var moveDirection = Vector3.zero;
             if (Input.GetKey(KeyCode.D))
@@ -52,8 +48,7 @@ namespace Architecture.Classic.Plus
 
         private void Die()
         {
-            // When the player dies, the game is lost.
-            GameManager.Instance.LoseGame();
+
         }
     }
 }

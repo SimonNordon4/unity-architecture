@@ -34,7 +34,7 @@ namespace Architecture.Classic.Plus
         {
             // Initialise by calculating the decrement in spawn rate per enemy spawn.
             _enemySpawnRateIncrement = (enemySpawnRate - maxEnemySpawnRate) / enemiesToSpawn;
-            _playerTransform = GameManager.Instance.PlayerTransform;
+            _playerTransform = GameCatalog.Instance.Player.transform;
         }
 
         void Update()

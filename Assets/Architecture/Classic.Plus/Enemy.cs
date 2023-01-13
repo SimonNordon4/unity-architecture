@@ -26,9 +26,6 @@ namespace Architecture.Classic.Plus
         public void Update()
         {
             
-            if(GameManager.Instance.CurrentGameState != GameManager.GameState.Active)
-                return;
-            
             var directionToPlayer = (playerTransform.position - transform.position).normalized;
             _move.Direction = directionToPlayer;
 
@@ -44,7 +41,6 @@ namespace Architecture.Classic.Plus
             if( _health.currentHealth <=0 )
             {
                 Destroy(this);
-                GameManager.Instance.EnemySpawner.currentEnemies--;
             }
         }
 

@@ -132,7 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 142307002}
+  - component: {fileID: 142307004}
   - component: {fileID: 142307003}
+  - component: {fileID: 142307005}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -167,11 +169,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a356baf5079a3d64cb81a25a3ca6bb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentGameState>k__BackingField: 0
-  <PlayerTransform>k__BackingField: {fileID: 580656574}
+--- !u!114 &142307004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142307000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3ce0a6ddc14b29b013d86d172c0d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <GameInterface>k__BackingField: {fileID: 142307003}
+  <GameState>k__BackingField: {fileID: 142307005}
+  <Player>k__BackingField: {fileID: 580656579}
   <EnemySpawner>k__BackingField: {fileID: 1791993624}
-  winScreen: {fileID: 0}
-  loseScreen: {fileID: 0}
+  <WinScreenUI>k__BackingField: {fileID: 364951287}
+  <LoseScreenUI>k__BackingField: {fileID: 628465730}
+--- !u!114 &142307005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142307000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b510e413b24d41e482e82cef89e977db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CurrentState>k__BackingField: 0
 --- !u!4 &284760291 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 552119799437309293, guid: 24999068e5f537f45802a37ad1be5ff6, type: 3}
@@ -267,7 +295,7 @@ GameObject:
   - component: {fileID: 546101930}
   - component: {fileID: 546101929}
   m_Layer: 5
-  m_Name: BulletBoosts Label (1)
+  m_Name: Level Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,7 +2859,6 @@ MonoBehaviour:
   maxCurrentEnemies: 50
   enemySpawnRate: 1
   maxEnemySpawnRate: 0.1
-  playerTransform: {fileID: 0}
   minMaxSpawnDistance: {x: 5, y: 10}
 --- !u!1 &1847367322
 GameObject:

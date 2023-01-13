@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa435e1ca96ae2347b822e157a66f479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BulletLifetime>k__BackingField: 10
+  <BulletLifetime>k__BackingField: 2
   <BulletDamage>k__BackingField: 1
 --- !u!114 &-4255396140072562850
 MonoBehaviour:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6096f59800cd2dc4f838a765c3beb51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MoveSpeed>k__BackingField: 10
+  <MoveSpeed>k__BackingField: 20
 --- !u!114 &5814783522688769594
 MonoBehaviour:
   m_ObjectHideFlags: 0

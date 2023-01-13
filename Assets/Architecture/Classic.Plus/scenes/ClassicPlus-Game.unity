@@ -3489,10 +3489,10 @@ MonoBehaviour:
   bigEnemyPrefab: {fileID: 8116421388150135729, guid: d8267c15d8e01e94cab810bf52ae7ac5, type: 3}
   smallEnemySpawnChance: 0.1
   bigEnemySpawnChance: 0.03
-  <EnemiesToSpawn>k__BackingField: 100
-  maxCurrentEnemies: 15
+  <EnemiesToSpawn>k__BackingField: 400
+  maxCurrentEnemies: 30
   enemySpawnRate: 1
-  maxEnemySpawnRate: 0.1
+  maxEnemySpawnRate: 0.01
   minMaxSpawnDistance: {x: 10, y: 15}
 --- !u!114 &1791993625
 MonoBehaviour:

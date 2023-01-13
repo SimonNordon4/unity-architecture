@@ -98,10 +98,12 @@ graph TD;
     G[GameUI]-->J[LoseScreen];
 ```
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+### Breaking the Rules!
+
+There are some places where it might be a better idea to avoid the Entity-Component Architecture. Namely UI.
+The User Interface is like a layer that sits nicely on top of our game. UI can be quite complex and may require state management as complicated, if not more complicated than the game itself.
+
+For this reason it's generally a good idea to NOT have game components and UI components talk directly to each other, as this can make the UI state very difficult to track.
+
+Instead, we can use a component at the root our UI canvas to act as an interface between the UI and the game, acting as a clean cut off point between the two systems. This wont always be appropriate, but in smaller projects is preferable to having the UI and Game strongly coupled.
+

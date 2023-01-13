@@ -7,7 +7,7 @@ namespace Architecture.Classic.Plus
     /// <summary>
     /// A UI element that displays a parents Health Component Data.
     /// </summary>
-    public class HealthBar : MonoBehaviour
+    public class HealthBarUI : MonoBehaviour
     {
         private Health _health;
 

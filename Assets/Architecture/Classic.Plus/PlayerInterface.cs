@@ -6,16 +6,13 @@ using UnityEngine;
 namespace Architecture.Classic.Plus
 {
     [RequireComponent(typeof(Move))]
-    [RequireComponent(typeof(Health))]
-    public class Player : MonoBehaviour
+    public class PlayerInterface : MonoBehaviour
     {
         private Move _move;
-        private Health _health;
 
         private void Start()
         {
             _move = GetComponent<Move>();
-            _health = GetComponent<Health>();
         }
 
         public void Update()

@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameInterface>k__BackingField: {fileID: 142307003}
   <GameState>k__BackingField: {fileID: 142307005}
-  <Player>k__BackingField: {fileID: 580656579}
+  <PlayerInterface>k__BackingField: {fileID: 0}
   <EnemySpawner>k__BackingField: {fileID: 1791993624}
   <WinScreenUI>k__BackingField: {fileID: 364951287}
   <LoseScreenUI>k__BackingField: {fileID: 628465730}
@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 580656578}
   - component: {fileID: 580656577}
   - component: {fileID: 580656576}
+  - component: {fileID: 580656580}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -585,8 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc9377131ade02429d583e0e8700a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 0
+  <Max>k__BackingField: 10
 --- !u!114 &580656578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +612,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd6bcedbacf1fd4493d5788722b3723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &580656580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580656570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f63e86cc2d4cbabcba66b617b863a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeStateBehaviours:
+  - {fileID: 580656576}
+  - {fileID: 580656579}
+  - {fileID: 580656577}
+  - {fileID: 580656578}
 --- !u!1 &592584050
 GameObject:
   m_ObjectHideFlags: 0

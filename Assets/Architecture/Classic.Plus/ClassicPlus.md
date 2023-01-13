@@ -75,10 +75,25 @@ Instantiating the component we need allows us to avoid a GetComponent<>() call.
 
 We also expanded the component architecture by taking manager and controller classes, and splitting them up into small components.
 
+Before:
 ```mermaid
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    A[GameObject] -> B[GameManager]
+    B -> C[PlayerHealth]
+    B -> D[EnemySpawner]
+    B -> E[WinScreen]
+    B -> F[LoseScreen]
+```
+After:
+```mermaid
+graph TD;
+    A[GameObject] -> B[GameCatalog]
+    B[GameCatalog] -> C[GameInterface]
+    B[GameCatalog] -> D[GameState]
+    B[GameCatalog] -> E[Player]
+    B[GameCatalog] -> F[EnemySpawner]
+    B[GameCatalog] -> G[GameUI]
+    B[GameCatalog] -> H[ApplicationInterface]
+    G[GameUI] -> I[WinScreen]
+    G[GameUI] -> J[LoseScreen]
 ```

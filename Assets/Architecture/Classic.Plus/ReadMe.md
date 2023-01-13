@@ -78,22 +78,30 @@ We also expanded the component architecture by taking manager and controller cla
 Before:
 ```mermaid
 graph TD;
-    A[GameObject] -> B[GameManager];
-    B -> C[PlayerHealth];
-    B -> D[EnemySpawner];
-    B -> E[WinScreen];
-    B -> F[LoseScreen];
+    A[GameObject]-->B[GameManager];
+    B-->C[PlayerHealth];
+    B-->D[EnemySpawner];
+    B-->E[WinScreen];
+    B-->F[LoseScreen];
 ```
 After:
 ```mermaid
 graph TD;
-    A[GameObject] -> B[GameCatalog];
-    B[GameCatalog] -> C[GameInterface];
-    B[GameCatalog] -> D[GameState];
-    B[GameCatalog] -> E[Player];
-    B[GameCatalog] -> F[EnemySpawner];
-    B[GameCatalog] -> G[GameUI];
-    B[GameCatalog] -> H[ApplicationInterface];
-    G[GameUI] -> I[WinScreen];
-    G[GameUI] -> J[LoseScreen];
+    A[GameObject]-->B[GameCatalog];
+    B[GameCatalog]-->C[GameInterface];
+    B[GameCatalog]-->D[GameState];
+    B[GameCatalog]-->E[Player];
+    B[GameCatalog]-->F[EnemySpawner];
+    B[GameCatalog]-->G[GameUI];
+    B[GameCatalog]-->H[ApplicationInterface];
+    G[GameUI]-->I[WinScreen];
+    G[GameUI]-->J[LoseScreen];
+```
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```

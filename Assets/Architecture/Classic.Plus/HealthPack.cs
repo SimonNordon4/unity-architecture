@@ -1,12 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Architecture.Classic.Plus
 {
     public class HealthPack : MonoBehaviour
     {
-        public HealthPackSpawner spawner;
-        public int healthAmount = 1;
+        private HealthPackSpawner _spawner;
+        [SerializeField] private int _healthAmount = 1;
+
+        public void SetSpawner(HealthPackSpawner spawner)
+        {
+            _spawner = spawner;
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -14,10 +20,10 @@ namespace Architecture.Classic.Plus
                 var playerHealth = other.GetComponent<Health>();
                 if (playerHealth.Current < playerHealth.Max)
                 {
-                    playerHealth.ApplyHeal(healthAmount);
+                    playerHealth.ApplyHeal(_healthAmount);
                 }
 
-                spawner.concurrentPickups--;
+                _spawner.RemoveHealthPack();
                 Destroy(gameObject);
             }
         }

@@ -54,8 +54,13 @@ namespace Architecture.Classic.Plus
                 spawnPosition.y = 0.5f;
                 
                 var bulletBoost = Instantiate(PickupPrefab, spawnPosition, Quaternion.identity);
-                bulletBoost.Spawner = this;
+                bulletBoost.SetSpawner(this);
             }
+        }
+        
+        public void RemoveBulletBoost()
+        {
+            concurrentPickups--;
         }
     }
     

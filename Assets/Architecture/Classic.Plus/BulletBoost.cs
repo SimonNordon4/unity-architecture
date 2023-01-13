@@ -10,10 +10,14 @@ namespace Architecture.Classic.Plus
     /// </summary>
     public class BulletBoost : MonoBehaviour
     {
-        public BulletBoostSpawner Spawner { get; set; }
+        private BulletBoostSpawner _spawner;
         [field:SerializeField]
         public float CooldownReductionPercentage { get; private set; } = 0.1f;
 
+        public void SetSpawner(BulletBoostSpawner spawner)
+        {
+            _spawner = spawner;
+        }
         private void OnTriggerEnter(Collider other)
         {
             // TODO: Replace with physics layers
@@ -24,7 +28,7 @@ namespace Architecture.Classic.Plus
                 playerGun.bulletCooldown *= (1 - CooldownReductionPercentage);
                 
                 // Destroy the pickup.
-                Spawner.concurrentPickups--;
+                _spawner.RemoveBulletBoost();
                 Destroy(gameObject);
             }
         }

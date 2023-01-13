@@ -20,7 +20,7 @@ namespace Architecture.Classic.Plus
 
         private void Update()
         {
-            _text.text = "Enemies Left: " + (_enemySpawner.enemiesToSpawn + _enemySpawner.currentEnemies);
+            _text.text = "Enemies Left: " + (_enemySpawner.EnemiesToSpawn + _enemySpawner.CurrentEnemies);
         }
     }
 }

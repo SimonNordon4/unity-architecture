@@ -13,13 +13,9 @@ namespace Architecture.Classic.Plus
     public class GameInterface : MonoBehaviour
     {
         private GameState _state;
-        private GameObject _winScreen;
-        private GameObject _loseScreen;
         private void Start()
         {
             _state = GameCatalog.Instance.GameState;
-            _winScreen = GameCatalog.Instance.WinScreenUI;
-            _loseScreen = GameCatalog.Instance.LoseScreenUI;
         }
 
         private void Update()
@@ -31,7 +27,12 @@ namespace Architecture.Classic.Plus
                     PauseGame();
                     return;
                 }
-                ResumeGame();
+
+                if (_state.CurrentState == GameState.State.Paused)
+                {
+                    ResumeGame();
+                    return;
+                }
             }
         }
 
@@ -53,13 +54,12 @@ namespace Architecture.Classic.Plus
         public void WinGame()
         {
             _state.SetState(GameState.State.Finished);
-            _winScreen.SetActive(true);
+            
         }
 
         public void LoseGame()
         {
             _state.SetState(GameState.State.Finished);
-            _loseScreen.SetActive(false);
         }
     }
 }

@@ -14,16 +14,16 @@ namespace Architecture.Classic.Plus
 
         public bool dieOnTouch = false;
         
-        private Health _health;
         private Move _move;
 
         private void Start()
         {
-            _health = GetComponent<Health>();
             _move = GetComponent<Move>();
         }
 
-        public void Update()
+        // Due to limitations of the current architecture, we must use late update to ensure the enemies
+        // are tracking the most recent game state.
+        public void LateUpdate()
         {
             var directionToPlayer = (playerTransform.position - transform.position).normalized;
             _move.Direction = directionToPlayer;
@@ -38,10 +38,14 @@ namespace Architecture.Classic.Plus
 
                 if (dieOnTouch)
                 {
-                    spawner.currentEnemies--;
                     Destroy(gameObject);
                 }
             }
+        }
+
+        public void OnDestroy()
+        {
+            spawner.EnemyDied();
         }
     }
 }

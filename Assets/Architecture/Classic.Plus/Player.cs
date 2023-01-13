@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Architecture.Classic.Plus
 {
     [RequireComponent(typeof(Move))]
-    public class PlayerInterface : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         private Move _move;
 
@@ -32,6 +32,13 @@ namespace Architecture.Classic.Plus
                 moveDirection.z -= 1;
 
             _move.Direction = moveDirection.normalized;
+        }
+
+        // Using the inbuilt on destroy is the only way we can decouple the players health
+        // from their interface with the current Architecture.
+        private void OnDestroy()
+        {
+            GameCatalog.Instance.GameInterface.LoseGame();
         }
     }
 }

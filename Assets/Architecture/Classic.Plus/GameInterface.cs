@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Architecture.Classic.Plus
 {
@@ -11,40 +13,56 @@ namespace Architecture.Classic.Plus
     public class GameInterface : MonoBehaviour
     {
         private GameState _state;
-        private GameObject _winScreen;
-        private GameObject _loseScreen;
         private void Start()
         {
             _state = GameCatalog.Instance.GameState;
-            _winScreen = GameCatalog.Instance.WinScreenUI;
-            _loseScreen = GameCatalog.Instance.LoseScreenUI;
         }
 
-        public void StartGame()
+        private void Update()
         {
-            _state.SetState(GameState.State.Active);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_state.CurrentState == GameState.State.Active)
+                {
+                    PauseGame();
+                    return;
+                }
+
+                if (_state.CurrentState == GameState.State.Paused)
+                {
+                    ResumeGame();
+                    return;
+                }
+            }
+        }
+
+        public void OnStartGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void ResumeGame()
         {
             _state.SetState(GameState.State.Active);
+            GameCatalog.Instance.UI.HidePauseScreen();
         }
         
         public void PauseGame()
         {
             _state.SetState(GameState.State.Paused);
+            GameCatalog.Instance.UI.ShowPauseScreen();
         }
 
         public void WinGame()
         {
             _state.SetState(GameState.State.Finished);
-            _winScreen.SetActive(true);
+            GameCatalog.Instance.UI.ShowWinScreen();
         }
 
         public void LoseGame()
         {
             _state.SetState(GameState.State.Finished);
-            _loseScreen.SetActive(false);
+            GameCatalog.Instance.UI.ShowLoseScreen();
         }
     }
 }

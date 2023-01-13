@@ -28,9 +28,10 @@ namespace Architecture.Classic.Plus
                 Current = Max;
         }
 
+        // This is a bad way to handle death, it would be much better to use an Event (Coming Soon)
         private void OnDeath()
         {
-            Debug.Log(gameObject.name + " died");
+            Destroy(gameObject);
         }
     }
 }

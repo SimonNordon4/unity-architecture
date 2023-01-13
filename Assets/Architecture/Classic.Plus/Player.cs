@@ -36,20 +36,6 @@ namespace Architecture.Classic.Plus
 
             _move.Direction = moveDirection.normalized;
         }
-
-        public void ApplyDamage(int amount)
-        {
-            _health.currentHealth -= amount;
-            if( _health.currentHealth <=0 )
-            {
-                Die();
-            }
-        }
-
-        private void Die()
-        {
-
-        }
     }
 }
 

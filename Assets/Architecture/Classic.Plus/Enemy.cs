@@ -25,23 +25,8 @@ namespace Architecture.Classic.Plus
 
         public void Update()
         {
-            
             var directionToPlayer = (playerTransform.position - transform.position).normalized;
             _move.Direction = directionToPlayer;
-
-            if (_health.currentHealth <= 0)
-            {
-                
-            }
-        }
-        
-        public void ApplyDamage(int amount)
-        {
-            _health.currentHealth -= amount;
-            if( _health.currentHealth <=0 )
-            {
-                Destroy(this);
-            }
         }
 
         public void OnTriggerEnter(Collider other)
@@ -49,7 +34,7 @@ namespace Architecture.Classic.Plus
             // if the player is entered, deal damage
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<Player>().ApplyDamage(damage);
+                other.GetComponent<Health>().ApplyDamage(damage);
 
                 if (dieOnTouch)
                 {

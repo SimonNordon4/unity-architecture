@@ -12,9 +12,9 @@ namespace Architecture.Classic.Plus
             if (other.gameObject.CompareTag("Player"))
             {
                 var playerHealth = other.GetComponent<Health>();
-                if (playerHealth.currentHealth < playerHealth.maxHealth)
+                if (playerHealth.Current < playerHealth.Max)
                 {
-                    playerHealth.currentHealth += healthAmount;
+                    playerHealth.ApplyHeal(healthAmount);
                 }
 
                 spawner.concurrentPickups--;

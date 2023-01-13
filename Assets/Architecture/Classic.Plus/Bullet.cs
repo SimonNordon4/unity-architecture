@@ -25,7 +25,7 @@ namespace Architecture.Classic.Plus
             // TODO: Replace with physics tags so it always collides with a suitable object.
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.GetComponent<Health>().currentHealth -= BulletDamage;
+                other.GetComponent<Health>().ApplyDamage(BulletDamage);
                 Destroy(gameObject);
             }
         }

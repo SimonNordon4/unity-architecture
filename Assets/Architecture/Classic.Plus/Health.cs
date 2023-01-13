@@ -5,12 +5,32 @@ namespace Architecture.Classic.Plus
 {
     public class Health : MonoBehaviour
     {
-        public int maxHealth = 10;
-        public int currentHealth = 0;
+        [field:SerializeField]
+        public int Max { get; private set; } = 10;
+        public int Current { get; private set; } = 0;
 
         private void Start()
         {
-            currentHealth = maxHealth;
+            Current = Max;
+        }
+        
+        public void ApplyDamage(int damage)
+        {
+            Current -= damage;
+            if (Current <= 0)
+                OnDeath();
+        }
+
+        public void ApplyHeal(int amount)
+        {
+            Current += amount;
+            if (amount > Max)
+                Current = Max;
+        }
+
+        private void OnDeath()
+        {
+            Debug.Log(gameObject.name + " died");
         }
     }
 }

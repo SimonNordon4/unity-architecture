@@ -21,8 +21,8 @@ namespace Architecture.Classic.Plus
 
         private void Update()
         {
-            healthBar.localScale = new Vector3((float)_health.currentHealth / (float)_health.maxHealth, 1, 1);
-            healthText.text =  _health.currentHealth.ToString() + " / " + _health.maxHealth.ToString();
+            healthBar.localScale = new Vector3((float)_health.Current / (float)_health.Max, 1, 1);
+            healthText.text =  _health.Current.ToString() + " / " + _health.Max.ToString();
         }
     }
 }

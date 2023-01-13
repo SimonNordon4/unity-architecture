@@ -9,17 +9,18 @@ namespace Architecture.Classic.Plus
     /// </summary>
     public class EnemiesLeftText : MonoBehaviour
     {
-        public EnemySpawner enemySpawner;
+        private EnemySpawner _enemySpawner;
         private TextMeshProUGUI _text;
 
         private void Start()
         {
+            _enemySpawner = GameCatalog.Instance.EnemySpawner;
             _text = GetComponent<TextMeshProUGUI>();
         }
 
         private void Update()
         {
-            _text.text = "Enemies Left: " + (enemySpawner.enemiesToSpawn + enemySpawner.currentEnemies);
+            _text.text = "Enemies Left: " + (_enemySpawner.enemiesToSpawn + _enemySpawner.currentEnemies);
         }
     }
 }

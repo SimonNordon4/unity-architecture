@@ -9,18 +9,19 @@ namespace Architecture.Classic.Plus
     /// </summary>
     public class BulletCooldownText : MonoBehaviour
     {
-        public Gun gun;
+        private Gun _gun;
         private TextMeshProUGUI _text;
 
         private void Start()
         {
             _text = GetComponent<TextMeshProUGUI>();
+            _gun = GameCatalog.Instance.Player.GetComponent<Gun>();
         }
 
         private void Update()
         {
             // gun.bulletCooldown in seconds rounder to the nearest two decimal places
-            _text.text = "Bullet Cooldown: " + gun.bulletCooldown.ToString("F2") + "s";
+            _text.text = "Bullet Cooldown: " + _gun.bulletCooldown.ToString("F2") + "s";
         }
     }
 }

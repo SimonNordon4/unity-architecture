@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Architecture.Classic.Plus
 {
@@ -20,9 +22,22 @@ namespace Architecture.Classic.Plus
             _loseScreen = GameCatalog.Instance.LoseScreenUI;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (_state.CurrentState == GameState.State.Active)
+                {
+                    PauseGame();
+                    return;
+                }
+                ResumeGame();
+            }
+        }
+
         public void StartGame()
         {
-            _state.SetState(GameState.State.Active);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void ResumeGame()

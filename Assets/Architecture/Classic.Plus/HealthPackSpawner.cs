@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Architecture.Classic.Plus
 {
@@ -14,6 +16,11 @@ namespace Architecture.Classic.Plus
         private float _timeSinceLastSpawn = 0f;
         
         public Vector2 minMaxSpawnDistance = new Vector2(10f, 30f);
+
+        private void Start()
+        {
+            playerTransform = GameCatalog.Instance.Player.transform;
+        }
 
         private void Update()
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 884500749558397177}
   - component: {fileID: 884500749558397182}
   - component: {fileID: 884500749558397183}
-  - component: {fileID: 6087822389297022870}
+  - component: {fileID: 6304130625574263983}
   m_Layer: 9
   m_Name: BulletBoost
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6087822389297022870
+--- !u!114 &6304130625574263983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 884500749558397180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfaa48910921ceb46b0074936e20ba07, type: 3}
+  m_Script: {fileID: 11500000, guid: 34535a3a8522b5343ae71ad049abfe06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
-  cooldownReductionPercentage: 0.2
+  <CooldownReductionPercentage>k__BackingField: 0.1

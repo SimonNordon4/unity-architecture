@@ -25,7 +25,7 @@ namespace Architecture.Classic.Plus
         
         [field: SerializeField] public GameInterface GameInterface { get; private set; }
         [field: SerializeField] public GameState GameState { get; private set; }
-        [field: SerializeField] public PlayerInterface PlayerInterface { get; private set; }
+        [field: SerializeField] public GameObject Player { get; private set; }
         [field: SerializeField] public EnemySpawner EnemySpawner { get; private set; }
         [field: SerializeField] public GameObject WinScreenUI { get; private set; }
         [field: SerializeField] public GameObject LoseScreenUI { get; private set; }

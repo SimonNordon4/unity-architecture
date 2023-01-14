@@ -7,18 +7,19 @@ namespace Architecture.Classic.Plus
     {
         // change to singleton
         public EnemySpawner spawner;
-        
+
         // change to singleton
         public Transform playerTransform;
         public int damage = 1;
 
         public bool dieOnTouch = false;
-        
+
         private Move _move;
 
         private void Start()
         {
             _move = GetComponent<Move>();
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
         }
 
         // Due to limitations of the current architecture, we must use late update to ensure the enemies
@@ -29,17 +30,16 @@ namespace Architecture.Classic.Plus
             _move.Direction = directionToPlayer;
         }
 
+        // We set the layer to "Enemy" so should only collide with that layers filters.
         public void OnTriggerEnter(Collider other)
         {
-            // if the player is entered, deal damage
-            if (other.CompareTag("Player"))
-            {
-                other.GetComponent<Health>().ApplyDamage(damage);
+            other.TryGetComponent<Health>(out var health);
+            if (health != null)
+                health.ApplyDamage(damage);
 
-                if (dieOnTouch)
-                {
-                    Destroy(gameObject);
-                }
+            if (dieOnTouch)
+            {
+                Destroy(gameObject);
             }
         }
 

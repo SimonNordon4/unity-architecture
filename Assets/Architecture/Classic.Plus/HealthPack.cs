@@ -9,14 +9,19 @@ namespace Architecture.Classic.Plus
         private HealthPackSpawner _spawner;
         [SerializeField] private int _healthAmount = 1;
 
+        private void Start()
+        {
+            gameObject.layer = LayerMask.NameToLayer("Pickup");
+        }
+
         public void SetSpawner(HealthPackSpawner spawner)
         {
             _spawner = spawner;
         }
+        
+        // We set the layer to pickup, so will only collide with the layers filters.
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Player"))
-            {
                 var playerHealth = other.GetComponent<Health>();
                 if (playerHealth.Current < playerHealth.Max)
                 {
@@ -25,7 +30,6 @@ namespace Architecture.Classic.Plus
 
                 _spawner.RemoveHealthPack();
                 Destroy(gameObject);
-            }
         }
     }
 }

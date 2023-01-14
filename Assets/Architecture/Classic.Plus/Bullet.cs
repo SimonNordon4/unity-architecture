@@ -10,6 +10,12 @@ namespace Architecture.Classic.Plus
         [field:SerializeField]
         public int BulletDamage { get; private set; } = 1;
 
+        private void Start()
+        {
+            // Ensure the physics layer is attack
+            gameObject.layer = LayerMask.NameToLayer("Attack");
+        }
+
         public void Update()
         {
             BulletLifetime -= Time.deltaTime;
@@ -20,14 +26,11 @@ namespace Architecture.Classic.Plus
             }
         }
 
+        // We set the GameObject to Attack layer, so will only collide with its filters.
         public void OnTriggerEnter(Collider other)
         {
-            // TODO: Replace with physics tags so it always collides with a suitable object.
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                other.GetComponent<Health>().ApplyDamage(BulletDamage);
-                Destroy(gameObject);
-            }
+            other.GetComponent<Health>().ApplyDamage(BulletDamage);
+            Destroy(gameObject);
         }
     }
 }

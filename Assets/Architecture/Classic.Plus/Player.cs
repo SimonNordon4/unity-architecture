@@ -35,7 +35,8 @@ namespace Architecture.Classic.Plus
         }
 
         // Using the inbuilt on destroy is the only way we can decouple the players health
-        // from their interface with the current Architecture.
+        // from their interface with the current Architecture. As the health component would need to directly talk to 
+        // the interface, something we want to avoid.
         private void OnDestroy()
         {
             GameCatalog.Instance.GameInterface.LoseGame();

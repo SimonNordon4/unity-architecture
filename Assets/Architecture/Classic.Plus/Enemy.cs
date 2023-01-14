@@ -33,7 +33,9 @@ namespace Architecture.Classic.Plus
         // We set the layer to "Enemy" so should only collide with that layers filters.
         public void OnTriggerEnter(Collider other)
         {
-            other.GetComponent<Health>().ApplyDamage(damage);
+            other.TryGetComponent<Health>(out var health);
+            if (health != null)
+                health.ApplyDamage(damage);
 
             if (dieOnTouch)
             {

@@ -22,10 +22,13 @@ namespace Architecture.Classic.Plus
         // We set the layer to pickup, so will only collide with the layers filters.
         private void OnTriggerEnter(Collider other)
         {
-                var playerHealth = other.GetComponent<Health>();
-                if (playerHealth.Current < playerHealth.Max)
+                TryGetComponent<Health>(out var health);
+                if (health == null)
+                    return;
+                
+                if (health.Current < health.Max)
                 {
-                    playerHealth.ApplyHeal(_healthAmount);
+                    health.ApplyHeal(_healthAmount);
                 }
 
                 _spawner.RemoveHealthPack();

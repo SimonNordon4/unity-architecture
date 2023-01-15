@@ -4,9 +4,11 @@ namespace Architecture.Classic.Plus
 {
     public class Gun : MonoBehaviour
     {
-        public GameObject bulletPrefab;
-        public float bulletCooldown = 1f;
-        public float range = 5f;
+        [SerializeField] private Move bulletPrefab;
+        [SerializeField]
+        private float bulletCooldown = 1f;
+        [SerializeField]
+        private float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
 
         private void Update()
@@ -43,7 +45,7 @@ namespace Architecture.Classic.Plus
                 if (closestEnemy != null)
                 {
                     var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                    bullet.GetComponent<Move>().Direction = (closestEnemy.position - transform.position).normalized;
+                    bullet.Direction = (closestEnemy.position - transform.position).normalized;
                     _timeSinceLastBullet = 0.0f;
                     _timeSinceLastBullet = 0.0f;
                 }

@@ -25,7 +25,7 @@ namespace Architecture.Classic.Plus
             {
                 // Reduce the players bullet cooldown by a percentage of its current value.
                 var playerGun = other.GetComponent<Gun>();
-                playerGun.bulletCooldown *= (1 - CooldownReductionPercentage);
+                playerGun.DecreaseCooldown(1 - CooldownReductionPercentage);
                 
                 // Destroy the pickup.
                 _spawner.RemoveBulletBoost();

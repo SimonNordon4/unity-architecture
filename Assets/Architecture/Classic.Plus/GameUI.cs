@@ -31,7 +31,7 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
-        UpdateGunCoolDownText(_gun.bulletCooldown);
+        UpdateGunCoolDownText(_gun.BulletCooldown);
         UpdateEnemiesRemainingText(_enemySpawner.CurrentEnemies + _enemySpawner.EnemiesToSpawn);
     }
 

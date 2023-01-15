@@ -5,8 +5,8 @@ namespace Architecture.Classic.Plus
     public class Gun : MonoBehaviour
     {
         [SerializeField] private Move bulletPrefab;
-        [SerializeField]
-        private float bulletCooldown = 1f;
+        [field:SerializeField]
+        public float BulletCooldown { get; private set; } = 1f;
         [SerializeField]
         private float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
@@ -14,7 +14,7 @@ namespace Architecture.Classic.Plus
         private void Update()
         {
             _timeSinceLastBullet += Time.deltaTime;
-            if (_timeSinceLastBullet > bulletCooldown)
+            if (_timeSinceLastBullet > BulletCooldown)
             {
                 // Find the closet enemy.
                 var results = new Collider[128];
@@ -50,6 +50,11 @@ namespace Architecture.Classic.Plus
                     _timeSinceLastBullet = 0.0f;
                 }
             }
+        }
+
+        public void DecreaseCooldown(float percentageOfCurrent)
+        {
+            BulletCooldown *= percentageOfCurrent;
         }
     }
 }

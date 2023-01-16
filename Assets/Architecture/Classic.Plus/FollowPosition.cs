@@ -10,17 +10,18 @@ namespace Architecture.Classic.Plus
     /// </summary>
     public class FollowPosition : MonoBehaviour
     {
-        public Transform target;
-        private Vector3 offset;
+        [SerializeField]
+        private Transform target;
+        private Vector3 _offset;
 
         void Start()
         {
-            offset = transform.position;
+            _offset = transform.position;
         }
 
         void LateUpdate()
         {
-            transform.position = target.position + offset;
+            transform.position = target.position + _offset;
         }
     }
 }

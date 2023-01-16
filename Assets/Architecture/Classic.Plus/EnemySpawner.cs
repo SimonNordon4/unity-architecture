@@ -59,10 +59,7 @@ namespace Architecture.Classic.Plus
                     if (RandomSpawnChance(bigEnemySpawnChance))
                         enemyToSpawn = bigEnemyPrefab;
                 
-                    var newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
-                    newEnemy.spawner = this;
-                    newEnemy.playerTransform = _playerTransform;
-                
+                    Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
                     CurrentEnemies++;
                     EnemiesToSpawn--;
                 

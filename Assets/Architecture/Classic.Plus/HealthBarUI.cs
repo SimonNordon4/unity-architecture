@@ -10,9 +10,10 @@ namespace Architecture.Classic.Plus
     public class HealthBarUI : MonoBehaviour
     {
         private Health _health;
-
-        public RectTransform healthBar;
-        public TextMeshProUGUI healthText;
+        [SerializeField]
+        private RectTransform healthBar;
+        [SerializeField]
+        private TextMeshProUGUI healthText;
        
         private void Start()
         {

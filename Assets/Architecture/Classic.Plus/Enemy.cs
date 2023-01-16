@@ -5,47 +5,51 @@ namespace Architecture.Classic.Plus
 {
     public class Enemy : MonoBehaviour
     {
-        // change to singleton
-        public EnemySpawner spawner;
+        [SerializeField] private int damage = 1;
+        [SerializeField] private bool dieOnTouch = false;
 
-        // change to singleton
-        public Transform playerTransform;
-        public int damage = 1;
-
-        public bool dieOnTouch = false;
-
+        private Transform _playerTransform;
+        private EnemySpawner _spawner;
         private Move _move;
+
+        private LayerMask _playerLayer;
 
         private void Start()
         {
+            _playerTransform = GameCatalog.Instance.Player.transform;
+            _spawner = GameCatalog.Instance.EnemySpawner;
             _move = GetComponent<Move>();
             gameObject.layer = LayerMask.NameToLayer("Enemy");
+            _playerLayer = LayerMask.NameToLayer("Player");
         }
 
         // Due to limitations of the current architecture, we must use late update to ensure the enemies
         // are tracking the most recent game state.
         public void LateUpdate()
         {
-            var directionToPlayer = (playerTransform.position - transform.position).normalized;
+            var directionToPlayer = (_playerTransform.position - transform.position).normalized;
             _move.Direction = directionToPlayer;
         }
 
         // We set the layer to "Enemy" so should only collide with that layers filters.
         public void OnTriggerEnter(Collider other)
         {
-            other.TryGetComponent<Health>(out var health);
-            if (health != null)
-                health.ApplyDamage(damage);
-
-            if (dieOnTouch)
+            if (other.gameObject.layer == _playerLayer)
             {
-                Destroy(gameObject);
+                other.TryGetComponent<Health>(out var health);
+                if (health != null)
+                    health.ApplyDamage(damage);
+
+                if (dieOnTouch)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 
         public void OnDestroy()
         {
-            spawner.EnemyDied();
+            _spawner.EnemyDied();
         }
     }
 }

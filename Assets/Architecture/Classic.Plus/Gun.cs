@@ -16,9 +16,10 @@ namespace Architecture.Classic.Plus
             _timeSinceLastBullet += Time.deltaTime;
             if (_timeSinceLastBullet > BulletCooldown)
             {
+                var position = transform.position;
                 // Find the closet enemy.
                 var results = new Collider[128];
-                var enemies = Physics.OverlapSphereNonAlloc(transform.position,
+                var enemies = Physics.OverlapSphereNonAlloc(position,
                     range,
                     results,
                     Physics.AllLayers,
@@ -31,7 +32,7 @@ namespace Architecture.Classic.Plus
                 {
                     if (results[i].gameObject.CompareTag("Enemy"))
                     {
-                        var distance = Vector3.Distance(transform.position, results[i].transform.position);
+                        var distance = Vector3.Distance(position, results[i].transform.position);
                     
                         if (distance < closestEnemyDistance)
                         {
@@ -44,9 +45,8 @@ namespace Architecture.Classic.Plus
                 // Only fire a bullet if an enemy was found.
                 if (closestEnemy != null)
                 {
-                    var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                    bullet.Direction = (closestEnemy.position - transform.position).normalized;
-                    _timeSinceLastBullet = 0.0f;
+                    var bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+                    bullet.Direction = (Vector3)(closestEnemy.position - position).normalized;
                     _timeSinceLastBullet = 0.0f;
                 }
             }

@@ -5,21 +5,24 @@ namespace Architecture.Classic.Plus
 {
     public class Bullet : MonoBehaviour
     {
-        [field:SerializeField]
-        public float BulletLifetime { get; private set; } = 10f;
-        [field:SerializeField]
-        public int BulletDamage { get; private set; } = 1;
+        [SerializeField]
+        private float bulletLifetime = 10f;
+        [SerializeField] 
+        private int bulletDamage = 1;
+
+        private LayerMask _enemyLayer;
 
         private void Start()
         {
             // Ensure the physics layer is attack
             gameObject.layer = LayerMask.NameToLayer("Attack");
+            _enemyLayer = LayerMask.NameToLayer("Enemy");
         }
 
         public void Update()
         {
-            BulletLifetime -= Time.deltaTime;
-            if (BulletLifetime <= 0)
+            bulletLifetime -= Time.deltaTime;
+            if (bulletLifetime <= 0)
             {
                 // TODO: Don't destroy, pool
                 Destroy(gameObject);
@@ -29,8 +32,11 @@ namespace Architecture.Classic.Plus
         // We set the GameObject to Attack layer, so will only collide with its filters.
         public void OnTriggerEnter(Collider other)
         {
-            other.GetComponent<Health>().ApplyDamage(BulletDamage);
-            Destroy(gameObject);
+            if (other.gameObject.layer == _enemyLayer)
+            {
+                other.GetComponent<Health>().ApplyDamage(bulletDamage);
+                Destroy(gameObject);
+            }
         }
     }
 }

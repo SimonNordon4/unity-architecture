@@ -6,36 +6,42 @@ namespace Architecture.Benchmark.Avoidance
 {
     public class Enemy : MonoBehaviour
     {
-        // change to singleton
-        public EnemySpawner spawner;
-        // change to singleton
         public Transform playerTransform;
         private Move _move;
 
-        private List<Transform> _enemies = new List<Transform>();
+        private readonly List<Transform> _enemies = new List<Transform>();
 
-        private Vector3 repulsionVector;
-        private float repulsionMagnitude;
+        private Vector3 _repulsionDirection = Vector3.zero;
+        private float _enemyRadius;
 
         private void Start()
         {
             _move = GetComponent<Move>();
+            _enemyRadius = GetComponent<CapsuleCollider>().radius;
         }
 
-
-
-        public void LateUpdate()
+        public void Update()
         {
-            var directionToPlayer = (playerTransform.position - transform.position).normalized;
+            var playerPosition = playerTransform.position;
+            var currentPosition = transform.position;
+            var directionToPlayer = (playerPosition - currentPosition).normalized;
             
-            repulsionVector = Vector3.zero;
-            repulsionMagnitude = 0;
+            _repulsionDirection = Vector3.zero;
+            
             foreach (var enemy in _enemies)
             {
-                repulsionVector += (enemy.transform.position - transform.position);
+                var enemyPosition = enemy.position;
+                var directionToEnemy = (currentPosition - enemyPosition).normalized;
+                var distanceToEnemy = Vector3.Distance(enemyPosition, currentPosition);
+                
+                // the closer the enemies are, the greater the repulsion, so we take the inverse of the distance
+                var repulsionMagnitude = _enemyRadius - distanceToEnemy;
+                var repulsion = directionToEnemy * repulsionMagnitude;
+                _repulsionDirection += repulsion;
             }
             
-            _move.Direction = directionToPlayer + repulsionVector;
+            _move.Direction = directionToPlayer + _repulsionDirection.normalized * EnemySpawner.Instance.repulsionMultiplier;
+
         }
 
         public void OnTriggerEnter(Collider other)

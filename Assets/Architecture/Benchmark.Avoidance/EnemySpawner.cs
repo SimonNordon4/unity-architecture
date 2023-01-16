@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -7,20 +8,28 @@ namespace Architecture.Benchmark.Avoidance
 {
     public class EnemySpawner : MonoBehaviour
     {
+        public static EnemySpawner Instance { get; private set; }
         // Enemy types we want to spawn.
         [SerializeField] private Enemy enemyPrefab;
 
         // Maximum enemies to spawn in level.
         [field: SerializeField] public int EnemiesToSpawn { get; private set; } = 100;
-
         [SerializeField] private float enemySpawnRate = 1f;
+
+        public float repulsionMultiplier = 1.0f;
 
         // Every time an enemy spawns, the next enemy will spawn slightly faster.
         private float _timeSinceLastEnemySpawn = 0f;
 
-        [FormerlySerializedAs("_playerTransform")] [SerializeField] private Transform playerTransform;
+        [SerializeField] private Transform playerTransform;
         [SerializeField] private Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
+        
+        private List<Enemy> _enemies = new List<Enemy>();
 
+        private void Start()
+        {
+            Instance = this;
+        }
 
         void Update()
         {
@@ -37,8 +46,8 @@ namespace Architecture.Benchmark.Avoidance
                 var enemyToSpawn = enemyPrefab;
 
                 var newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
-                newEnemy.spawner = this;
                 newEnemy.playerTransform = playerTransform;
+                _enemies.Add(newEnemy);
 
                 EnemiesToSpawn--;
                 _timeSinceLastEnemySpawn = 0f;

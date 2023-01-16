@@ -6,12 +6,15 @@ using UnityEngine;
 namespace Architecture.Benchmark.Avoidance
 {
     [RequireComponent(typeof(Move))]
-    public class Player : MonoBehaviour
+    public class PlayerTrigger : MonoBehaviour
     {
+        public static PlayerTrigger Instance { get; set; }
+        
         private Move _move;
 
         private void Start()
         {
+            Instance = this;
             _move = GetComponent<Move>();
         }
 

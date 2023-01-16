@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Architecture.Benchmark.Avoidance
 {
-    public class Enemy : MonoBehaviour
+    public class EnemyTrigger : MonoBehaviour
     {
         public Transform playerTransform;
         private Move _move;
@@ -18,6 +18,7 @@ namespace Architecture.Benchmark.Avoidance
         {
             _move = GetComponent<Move>();
             _enemyRadius = GetComponent<CapsuleCollider>().radius;
+            playerTransform = PlayerTrigger.Instance.transform;
         }
 
         public void FixedUpdate()

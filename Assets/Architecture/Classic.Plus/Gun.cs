@@ -4,19 +4,22 @@ namespace Architecture.Classic.Plus
 {
     public class Gun : MonoBehaviour
     {
-        public GameObject bulletPrefab;
-        public float bulletCooldown = 1f;
-        public float range = 5f;
+        [SerializeField] private Move bulletPrefab;
+        [field:SerializeField]
+        public float BulletCooldown { get; private set; } = 1f;
+        [SerializeField]
+        private float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
 
         private void Update()
         {
             _timeSinceLastBullet += Time.deltaTime;
-            if (_timeSinceLastBullet > bulletCooldown)
+            if (_timeSinceLastBullet > BulletCooldown)
             {
+                var position = transform.position;
                 // Find the closet enemy.
                 var results = new Collider[128];
-                var enemies = Physics.OverlapSphereNonAlloc(transform.position,
+                var enemies = Physics.OverlapSphereNonAlloc(position,
                     range,
                     results,
                     Physics.AllLayers,
@@ -29,7 +32,7 @@ namespace Architecture.Classic.Plus
                 {
                     if (results[i].gameObject.CompareTag("Enemy"))
                     {
-                        var distance = Vector3.Distance(transform.position, results[i].transform.position);
+                        var distance = Vector3.Distance(position, results[i].transform.position);
                     
                         if (distance < closestEnemyDistance)
                         {
@@ -42,12 +45,16 @@ namespace Architecture.Classic.Plus
                 // Only fire a bullet if an enemy was found.
                 if (closestEnemy != null)
                 {
-                    var bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-                    bullet.GetComponent<Move>().Direction = (closestEnemy.position - transform.position).normalized;
-                    _timeSinceLastBullet = 0.0f;
+                    var bullet = Instantiate(bulletPrefab, position, Quaternion.identity);
+                    bullet.Direction = (Vector3)(closestEnemy.position - position).normalized;
                     _timeSinceLastBullet = 0.0f;
                 }
             }
+        }
+
+        public void DecreaseCooldown(float percentageOfCurrent)
+        {
+            BulletCooldown *= percentageOfCurrent;
         }
     }
 }

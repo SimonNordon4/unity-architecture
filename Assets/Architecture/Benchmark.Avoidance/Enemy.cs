@@ -20,7 +20,7 @@ namespace Architecture.Benchmark.Avoidance
             _enemyRadius = GetComponent<CapsuleCollider>().radius;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             var playerPosition = playerTransform.position;
             var currentPosition = transform.position;
@@ -34,14 +34,12 @@ namespace Architecture.Benchmark.Avoidance
                 var directionToEnemy = (currentPosition - enemyPosition).normalized;
                 var distanceToEnemy = Vector3.Distance(enemyPosition, currentPosition);
                 
-                // the closer the enemies are, the greater the repulsion, so we take the inverse of the distance
-                var repulsionMagnitude = _enemyRadius - distanceToEnemy;
+                // maximum distance to enemy should only every be the radius * 2. We want repulsion to increase the closer the enemy is.
+                var repulsionMagnitude = _enemyRadius * 2 - distanceToEnemy;
                 var repulsion = directionToEnemy * repulsionMagnitude;
                 _repulsionDirection += repulsion;
             }
-            
             _move.Direction = directionToPlayer + _repulsionDirection.normalized * EnemySpawner.Instance.repulsionMultiplier;
-
         }
 
         public void OnTriggerEnter(Collider other)

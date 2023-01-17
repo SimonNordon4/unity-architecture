@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Architecture.Classic.Events
 {
@@ -10,6 +11,8 @@ namespace Architecture.Classic.Events
         [SerializeField]
         private float range = 5f;
         private float _timeSinceLastBullet = float.PositiveInfinity;
+
+        public event Action<float> GunCooldownChanged;
 
         private void Update()
         {
@@ -55,6 +58,7 @@ namespace Architecture.Classic.Events
         public void DecreaseCooldown(float percentageOfCurrent)
         {
             BulletCooldown *= percentageOfCurrent;
+            GunCooldownChanged?.Invoke(BulletCooldown);
         }
     }
 }

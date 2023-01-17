@@ -29,6 +29,24 @@ namespace Architecture.Classic.Events
 
         private Transform _playerTransform;
         [SerializeField] private Vector2 minMaxSpawnDistance = new Vector2(5f, 10f);
+        public event Action<int> OnEnemiesLeftChanged;
+
+
+        private void OnEnable()
+        {
+            Enemy.EnemyDied += OnEnemyDied;
+        }
+
+        private void OnDisable()
+        {
+            Enemy.EnemyDied -= OnEnemyDied;
+        }
+
+        private void OnEnemyDied()
+        {
+            CurrentEnemies--;
+            OnEnemiesLeftChanged?.Invoke(CurrentEnemies + EnemiesToSpawn);
+        }
 
         private void Start()
         {
@@ -62,6 +80,8 @@ namespace Architecture.Classic.Events
                     Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
                     CurrentEnemies++;
                     EnemiesToSpawn--;
+                    
+                    OnEnemiesLeftChanged?.Invoke(CurrentEnemies + EnemiesToSpawn);
                 
                     // Increase the spawn rate of the next enemy.
                     enemySpawnRate -= _enemySpawnRateIncrement;
@@ -73,16 +93,6 @@ namespace Architecture.Classic.Events
         private bool RandomSpawnChance(float chance)
         {
             return Random.Range(0, 100) < chance * 100f;
-        }
-        
-        public void EnemyDied()
-        {
-            CurrentEnemies--;
-
-            if (EnemiesToSpawn + CurrentEnemies <= 0)
-            {
-                GameCatalog.Instance.GameInterface.WinGame();
-            }
         }
     }
 }

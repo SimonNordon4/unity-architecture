@@ -22,18 +22,25 @@ public class GameUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameInterface.OnGameLose += ShowLoseScreen;
-        GameInterface.OnGameWin += ShowWinScreen;
-        GameInterface.OnGamePause += ShowPauseScreen;
-        GameInterface.OnGameResume += HidePauseScreen;
+        GameCatalog.Instance.GameInterface.OnGameLose += ShowLoseScreen;
+        GameCatalog.Instance.GameInterface.OnGameWin += ShowWinScreen;
+        GameCatalog.Instance.GameInterface.OnGamePause += ShowPauseScreen;
+        GameCatalog.Instance.GameInterface.OnGameResume += HidePauseScreen;
+
+        GameCatalog.Instance.Player.GetComponent<Gun>().GunCooldownChanged += UpdateGunCoolDownText;
+        GameCatalog.Instance.EnemySpawner.OnEnemiesLeftChanged += UpdateEnemiesRemainingText;
     }
-    
+
+
     private void OnDisable()
     {
-        GameInterface.OnGameLose -= ShowLoseScreen;
-        GameInterface.OnGameWin -= ShowWinScreen;
-        GameInterface.OnGamePause -= ShowPauseScreen;
-        GameInterface.OnGameResume -= HidePauseScreen;
+        GameCatalog.Instance.GameInterface.OnGameLose -= ShowLoseScreen;
+        GameCatalog.Instance.GameInterface.OnGameWin -= ShowWinScreen;
+        GameCatalog.Instance.GameInterface.OnGamePause -= ShowPauseScreen;
+        GameCatalog.Instance.GameInterface.OnGameResume -= HidePauseScreen;
+        
+        GameCatalog.Instance.Player.GetComponent<Gun>().GunCooldownChanged -= UpdateGunCoolDownText;
+        GameCatalog.Instance.EnemySpawner.OnEnemiesLeftChanged -= UpdateEnemiesRemainingText;
     }
 
     private void Start()
@@ -47,12 +54,6 @@ public class GameUI : MonoBehaviour
         UpdateLevelText(1);
     }
 
-    private void Update()
-    {
-        UpdateGunCoolDownText(_gun.BulletCooldown);
-        UpdateEnemiesRemainingText(_enemySpawner.CurrentEnemies + _enemySpawner.EnemiesToSpawn);
-    }
-
     public void UpdateLevelText(int level)
     {
         _levelText.text = "Level: " + level;
@@ -60,12 +61,12 @@ public class GameUI : MonoBehaviour
     
     public void UpdateGunCoolDownText(float coolDown)
     {
-        _gunCoolDownText.text = "Gun Cool Down: " + coolDown;
+        _gunCoolDownText.text = "Gun Cool Down: " + coolDown.ToString("F2");
     }
     
-    public void UpdateEnemiesRemainingText(int enemiesRemaining)
+    public void UpdateEnemiesRemainingText(int enemiesLeft)
     {
-        _enemiesRemainingText.text = "Enemies Remaining: " + enemiesRemaining;
+        _enemiesRemainingText.text = "Enemies Remaining: " + enemiesLeft;
     }
     
     public void ShowWinScreen()

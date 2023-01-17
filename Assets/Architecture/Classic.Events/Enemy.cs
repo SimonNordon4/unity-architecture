@@ -9,15 +9,14 @@ namespace Architecture.Classic.Events
         [SerializeField] private bool dieOnTouch = false;
 
         private Transform _playerTransform;
-        private EnemySpawner _spawner;
         private Move _move;
 
         private LayerMask _playerLayer;
+        public static event Action EnemyDied;
 
         private void Start()
         {
             _playerTransform = GameCatalog.Instance.Player.transform;
-            _spawner = GameCatalog.Instance.EnemySpawner;
             _move = GetComponent<Move>();
             gameObject.layer = LayerMask.NameToLayer("Enemy");
             _playerLayer = LayerMask.NameToLayer("Player");
@@ -49,7 +48,7 @@ namespace Architecture.Classic.Events
 
         public void OnDestroy()
         {
-            _spawner.EnemyDied();
+            EnemyDied?.Invoke();
         }
     }
 }

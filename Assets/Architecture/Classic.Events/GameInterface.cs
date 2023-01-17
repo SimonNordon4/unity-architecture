@@ -12,13 +12,23 @@ namespace Architecture.Classic.Events
     /// </summary>
     public class GameInterface : MonoBehaviour
     {
-        public static event Action OnGameWin;
-        public static event Action OnGameLose;
-        public static event Action OnGamePause;
-        public static event Action OnGameResume;
+        public event Action OnGameWin;
+        public event Action OnGameLose;
+        public event Action OnGamePause;
+        public event Action OnGameResume;
         
         // reference the current state
         private GameState _state;
+
+        private void OnEnable()
+        {
+            
+        }
+
+        private void OnDisable()
+        {
+            
+        }
 
         private void Start()
         {

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class GameUI : MonoBehaviour
 {
+    
+    
     [SerializeField] private GameObject _winScreen;
     [SerializeField] private GameObject _loseScreen;
     [SerializeField] private GameObject _pauseScreen;
@@ -17,7 +19,23 @@ public class GameUI : MonoBehaviour
     
     private EnemySpawner _enemySpawner;
     private Gun _gun;
+
+    private void OnEnable()
+    {
+        GameInterface.OnGameLose += ShowLoseScreen;
+        GameInterface.OnGameWin += ShowWinScreen;
+        GameInterface.OnGamePause += ShowPauseScreen;
+        GameInterface.OnGameResume += HidePauseScreen;
+    }
     
+    private void OnDisable()
+    {
+        GameInterface.OnGameLose -= ShowLoseScreen;
+        GameInterface.OnGameWin -= ShowWinScreen;
+        GameInterface.OnGamePause -= ShowPauseScreen;
+        GameInterface.OnGameResume -= HidePauseScreen;
+    }
+
     private void Start()
     {
         _winScreen.SetActive(false);

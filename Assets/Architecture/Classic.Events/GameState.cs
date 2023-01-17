@@ -5,7 +5,7 @@ namespace Architecture.Classic.Events
 {
     public class GameState : MonoBehaviour
     {
-        public static EventHandler<State> OnStateChange;
+        public event EventHandler<State> OnStateChange;
         public enum State
         {
             None = 0,

@@ -12,7 +12,14 @@ namespace Architecture.Classic.Events
     /// </summary>
     public class GameInterface : MonoBehaviour
     {
+        public static event Action OnGameWin;
+        public static event Action OnGameLose;
+        public static event Action OnGamePause;
+        public static event Action OnGameResume;
+        
+        // reference the current state
         private GameState _state;
+
         private void Start()
         {
             _state = GameCatalog.Instance.GameState;
@@ -43,26 +50,22 @@ namespace Architecture.Classic.Events
 
         public void ResumeGame()
         {
-            _state.SetState(GameState.State.Active);
-            GameCatalog.Instance.UI.HidePauseScreen();
+            OnGameResume?.Invoke();
         }
         
         public void PauseGame()
         {
-            _state.SetState(GameState.State.Paused);
-            GameCatalog.Instance.UI.ShowPauseScreen();
+            OnGamePause?.Invoke();
         }
 
         public void WinGame()
         {
-            _state.SetState(GameState.State.Finished);
-            GameCatalog.Instance.UI.ShowWinScreen();
+            OnGameWin?.Invoke();
         }
 
         public void LoseGame()
         {
-            _state.SetState(GameState.State.Finished);
-            GameCatalog.Instance.UI.ShowLoseScreen();
+            OnGameLose?.Invoke();
         }
     }
 }

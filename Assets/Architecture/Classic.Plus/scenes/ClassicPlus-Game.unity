@@ -1057,8 +1057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aeadf6d4c0ccd744ba4ef4b5dcbe4bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2272617913446532710, guid: 7a1bfba8c5a3c7b4cbe8c5097bb56f71, type: 3}
-  bulletCooldown: 1
+  bulletPrefab: {fileID: -4255396140072562850, guid: 7a1bfba8c5a3c7b4cbe8c5097bb56f71, type: 3}
+  <BulletCooldown>k__BackingField: 1
   range: 5
 --- !u!114 &580656577
 MonoBehaviour:

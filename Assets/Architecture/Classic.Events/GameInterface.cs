@@ -16,19 +16,10 @@ namespace Architecture.Classic.Events
         public event Action OnGameLose;
         public event Action OnGamePause;
         public event Action OnGameResume;
-        
+
         // reference the current state
         private GameState _state;
 
-        private void OnEnable()
-        {
-            
-        }
-
-        private void OnDisable()
-        {
-            
-        }
 
         private void Start()
         {
@@ -62,7 +53,7 @@ namespace Architecture.Classic.Events
         {
             OnGameResume?.Invoke();
         }
-        
+
         public void PauseGame()
         {
             OnGamePause?.Invoke();
